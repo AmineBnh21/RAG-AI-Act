@@ -10,23 +10,18 @@ import time
 
 import chromadb
 
-from src.chunking import Chunk, build_chunks, load_corpus
-from src.config import CHROMA_DIR, STRATEGIES, ChunkStrategy, collection_name, settings
+from src.chunking import METADATA_FIELDS, Chunk, build_chunks, load_corpus
+from src.config import STRATEGIES, ChunkStrategy, collection_name, settings
 from src.embeddings import embed_passages
+from src.retrieval import get_client
 
 ADD_BATCH_SIZE = 256
-METADATA_FIELDS = ("article_id", "label", "title", "chapter", "paragraph", "kind", "strategy", "url")
 
 
 def chunk_metadata(chunk: Chunk) -> dict[str, str]:
     """Métadonnées Chroma (pas de None autorisé : remplacé par une chaîne vide)."""
     data = chunk.to_dict()
     return {field: data[field] or "" for field in METADATA_FIELDS}
-
-
-def get_client() -> chromadb.ClientAPI:
-    """Client Chroma persistant dans chroma_db/."""
-    return chromadb.PersistentClient(path=str(CHROMA_DIR))
 
 
 def build_collection(client: chromadb.ClientAPI, strategy: ChunkStrategy, corpus: list[dict]) -> int:

@@ -20,6 +20,7 @@ from src.config import (
 LIST_POINT = re.compile(r"^([a-z]{1,4}|\d{1,3})( (bis|ter|quater|quinquies|sexies))?\) ")
 ROMAN = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"}
 MAX_LEAD_CHARS = 300  # phrase d'introduction répétée dans chaque sous-chunk si elle est courte
+METADATA_FIELDS = ("article_id", "label", "title", "chapter", "paragraph", "kind", "strategy", "url")
 
 
 @dataclass(frozen=True)
