@@ -15,6 +15,8 @@ from chromadb.api.models.Collection import Collection
 from src.chunking import METADATA_FIELDS, Chunk
 from src.config import (
     CHROMA_DIR,
+    CLASSIFICATION_ARTICLES,
+    CLASSIFICATION_K,
     OBLIGATION_ARTICLES,
     OBLIGATIONS_K,
     TOP_K,
@@ -84,17 +86,29 @@ def search(
     return [RetrievedChunk(to_chunk(cid, doc, meta), 1 - dist) for cid, doc, meta, dist in rows]
 
 
-def search_with_obligations(
+AUGMENTATIONS: tuple[tuple[tuple[str, ...], int], ...] = (
+    (CLASSIFICATION_ARTICLES, CLASSIFICATION_K),
+    (OBLIGATION_ARTICLES, OBLIGATIONS_K),
+)
+
+
+def search_augmented(
     query: str,
     k: int = TOP_K,
-    k_obligations: int = OBLIGATIONS_K,
     strategy: ChunkStrategy | None = None,
+    augmentations: tuple[tuple[tuple[str, ...], int], ...] = AUGMENTATIONS,
 ) -> list[RetrievedChunk]:
-    """Recherche principale + recherche restreinte aux articles d'obligations, sans doublon."""
-    primary = search(query, k, strategy)
-    seen = {r.chunk.chunk_id for r in primary}
-    extra = search(query, k_obligations + len(primary), strategy, OBLIGATION_ARTICLES)
-    return primary + [r for r in extra if r.chunk.chunk_id not in seen][:k_obligations]
+    """Recherche principale, puis pour chaque (articles, n) les n meilleurs chunks de ces articles, sans doublon.
+
+    Garantit que le LLM voit les candidats de classification et d'obligations les plus proches,
+    même quand la recherche principale ne les remonte pas.
+    """
+    results = search(query, k, strategy)
+    for article_ids, n in augmentations:
+        seen = {r.chunk.chunk_id for r in results}
+        extra = search(query, n + len(results), strategy, article_ids)
+        results += [r for r in extra if r.chunk.chunk_id not in seen][:n]
+    return results
 
 
 def article_ids(results: list[RetrievedChunk]) -> set[str]:

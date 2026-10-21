@@ -67,7 +67,7 @@
     "description": "Notre chaîne de supermarchés a installé à l'entrée des magasins des caméras avec reconnaissance faciale en temps réel, fournies par un prestataire, qui comparent les visages des clients à une liste de personnes déjà signalées pour vol et alertent les vigiles.",
     "expected_risk": "haut_risque",
     "expected_articles": ["anx_III"],
-    "notes": "À VALIDER : identification biométrique à distance par un acteur privé. L'art. 5 §1 h) ne vise que les fins répressives (autorités) ; on relève donc de l'annexe III point 1 a). La licéité au regard du RGPD (art. 9) est une autre question. Déployeur."
+    "notes": "Cas discutable (à confirmer par le développeur) : identification biométrique à distance en temps réel par un acteur privé. L'art. 5 §1 h) ne vise que l'utilisation « à des fins répressives » ; le dernier alinéa de l'art. 5 §1 renvoie le reste à l'art. 9 RGPD. Hors fins répressives, on relève de l'annexe III point 1 a) (haut risque). La licéité au regard du RGPD est une question distincte. Déployeur."
   },
   {
     "id": "hr_02_infrastructure_critique",

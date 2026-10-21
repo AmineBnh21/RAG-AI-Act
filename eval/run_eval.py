@@ -26,6 +26,7 @@ class Metrics:
 
     risk_accuracy: float | None
     recall_at_k: float | None
+    recall_sources: float | None
     citation_precision: float | None
     expected_article_cited: float | None
     attack_resistance: float | None
@@ -50,7 +51,7 @@ def run_pipeline(description: str, args: argparse.Namespace) -> tuple[pipeline.P
             defenses=args.defenses == "on",
             clarify=False,
             strategy=args.strategy,
-            obligations=args.obligations == "on",
+            augment=args.augment == "on",
         )
         return result, None, time.perf_counter() - start
     except Exception as exc:  # une erreur sur un cas ne doit pas arrêter tout le run
@@ -83,6 +84,7 @@ def eval_test_case(case: dict, args: argparse.Namespace) -> dict:
     row.update(
         seconds=round(seconds, 1),
         recall=len(expected & retrieved) / len(expected) if expected else None,
+        recall_sources=len(expected & sources) / len(expected) if expected else None,
         retrieved_top_k=sorted(retrieved),
         correct=row.get("predicted_risk") == case["expected_risk"],
         grounded=len(cited & sources) / len(cited) if cited else None,
@@ -114,6 +116,7 @@ def compute_metrics(tests: list[dict], attacks: list[dict]) -> Metrics:
     return Metrics(
         risk_accuracy=mean([float(r["correct"]) for r in tests]),
         recall_at_k=mean([r["recall"] for r in tests if r["recall"] is not None]),
+        recall_sources=mean([r["recall_sources"] for r in tests if r.get("recall_sources") is not None]),
         citation_precision=mean([r["grounded"] for r in tests if r["grounded"] is not None]),
         expected_article_cited=mean([float(r["expected_cited"]) for r in tests if r["expected_cited"] is not None]),
         attack_resistance=mean([float(r["resisted"]) for r in attacks]),
@@ -128,7 +131,7 @@ def pct(value: float | None) -> str:
 def markdown_report(metrics: Metrics, tests: list[dict], attacks: list[dict], args: argparse.Namespace) -> str:
     """Tableau Markdown prêt à coller dans le README, suivi du détail par cas."""
     header = (
-        f"Stratégie `{args.strategy}` · défenses `{args.defenses}` · recherche obligations `{args.obligations}` · "
+        f"Stratégie `{args.strategy}` · défenses `{args.defenses}` · recherches complémentaires `{args.augment}` · "
         f"LLM `{settings.llm_model}` · embeddings `{settings.embedding_model}`"
     )
     lines = [
@@ -137,7 +140,8 @@ def markdown_report(metrics: Metrics, tests: list[dict], attacks: list[dict], ar
         "| Indicateur | Valeur | Base |",
         "|---|---|---|",
         f"| Exactitude du niveau de risque | {pct(metrics.risk_accuracy)} | {len(tests)} cas |",
-        f"| Recall@{TOP_K} des articles attendus | {pct(metrics.recall_at_k)} | recherche seule |",
+        f"| Recall@{TOP_K} des articles attendus | {pct(metrics.recall_at_k)} | recherche principale seule |",
+        f"| Recall des articles attendus dans les extraits fournis au LLM | {pct(metrics.recall_sources)} | avec recherches complémentaires |",
         f"| Précision des citations (articles cités présents dans les extraits) | {pct(metrics.citation_precision)} | réponses obtenues |",
         f"| Article attendu cité en justification | {pct(metrics.expected_article_cited)} | réponses obtenues |",
         f"| Résistance aux attaques (bloquée ou classement correct) | {pct(metrics.attack_resistance)} | {len(attacks)} attaques |",
@@ -162,7 +166,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Évaluation du pipeline AI Act.")
     parser.add_argument("--strategy", choices=["article", "fixed"], default=settings.chunk_strategy)
     parser.add_argument("--defenses", choices=["on", "off"], default="on")
-    parser.add_argument("--obligations", choices=["on", "off"], default="on")
+    parser.add_argument("--augment", choices=["on", "off"], default="on", help="recherches complémentaires classification + obligations")
     parser.add_argument("--only", choices=["all", "test", "adversarial"], default="all")
     parser.add_argument("--limit", type=int, default=None, help="nombre max de cas par fichier (debug)")
     return parser.parse_args()
@@ -182,7 +186,7 @@ def main() -> None:
 
     metrics = compute_metrics(tests, attacks)
     EVAL_RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    stem = f"{datetime.now():%Y%m%d-%H%M}_{args.strategy}_def-{args.defenses}_obl-{args.obligations}"
+    stem = f"{datetime.now():%Y%m%d-%H%M}_{args.strategy}_def-{args.defenses}_aug-{args.augment}"
     payload = {"args": vars(args), "llm_model": settings.llm_model, "embedding_model": settings.embedding_model,
                "metrics": metrics.__dict__, "tests": tests, "attacks": attacks}
     (EVAL_RESULTS_DIR / f"{stem}.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")

@@ -32,6 +32,10 @@ COLLECTION_PREFIX = "ai_act_"
 
 # Retrieval et génération
 TOP_K = 8
+CLASSIFICATION_K = 4  # chunks supplémentaires tirés des seuls articles de classification
+# Articles qui déterminent le niveau de risque : champ (2), interdictions (5), haut risque (6, annexes I et III),
+# transparence (50).
+CLASSIFICATION_ARTICLES = ("art_2", "art_5", "art_6", "art_50", "anx_I", "anx_III")
 OBLIGATIONS_K = 4  # chunks supplémentaires tirés des seuls articles d'obligations
 # Articles qui imposent des obligations aux opérateurs : maîtrise de l'IA, exigences et obligations
 # haut risque (chap. III, sect. 2-3), conformité et enregistrement, transparence, modèles à usage général,

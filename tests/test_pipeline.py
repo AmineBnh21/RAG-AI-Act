@@ -43,7 +43,7 @@ def fake_env(monkeypatch):
         return answer
 
     monkeypatch.setattr(retrieval, "search", lambda *a, **k: [retrieved("anx_III")])
-    monkeypatch.setattr(retrieval, "search_with_obligations", lambda *a, **k: [retrieved("anx_III"), retrieved("art_26")])
+    monkeypatch.setattr(retrieval, "search_augmented", lambda *a, **k: [retrieved("anx_III"), retrieved("art_26")])
     monkeypatch.setattr(security, "check_topic", lambda d: InputCheck("ok"))
     monkeypatch.setattr(clarification, "check", lambda d: clarification.Clarification([], []))
     monkeypatch.setattr(generation, "assess", fake_assess)
@@ -89,10 +89,10 @@ def test_succes_premier_essai(fake_env):
     assert [s.chunk.article_id for s in result.sources] == ["anx_III", "art_26"]
 
 
-def test_sans_recherche_obligations(fake_env):
+def test_sans_recherches_complementaires(fake_env):
     answers, _ = fake_env
     answers.append(make_assessment())
-    result = pipeline.assess(DESCRIPTION, obligations=False)
+    result = pipeline.assess(DESCRIPTION, augment=False)
     assert [s.chunk.article_id for s in result.sources] == ["anx_III"]
 
 

@@ -44,7 +44,7 @@ def test_metriques_et_rapport():
     assert metrics.recall_at_k == 0.5
     assert metrics.citation_precision == 1.0
     assert metrics.attack_resistance == 0.5
-    args = SimpleNamespace(strategy="article", defenses="on", obligations="on")
+    args = SimpleNamespace(strategy="article", defenses="on", augment="on")
     report = markdown_report(metrics, tests, attacks, args)
     assert "| Exactitude du niveau de risque | 50 % |" in report
     assert "❌ error" in report
