@@ -127,7 +127,12 @@ def invalid_citations(assessment: Assessment, results: list[RetrievedChunk]) -> 
 
 
 def validate_citations(assessment: Assessment, results: list[RetrievedChunk]) -> str | None:
-    """None si toutes les citations sont justifiées, sinon un message d'erreur pour le retry."""
+    """None si les citations sont présentes et justifiées, sinon un message d'erreur pour le retry.
+
+    Toute conclusion autre que « indetermine » doit citer au moins un article.
+    """
+    if assessment.risk_level != "indetermine" and not assessment.citations:
+        return "aucune citation : toute conclusion doit être justifiée par au moins un article des extraits"
     invalid = invalid_citations(assessment, results)
     if not invalid:
         return None

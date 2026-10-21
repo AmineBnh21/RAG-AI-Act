@@ -4,8 +4,8 @@ import pytest
 
 from scripts.build_index import chunk_metadata
 from src.chunking import Chunk
-from src.config import CHROMA_DIR
-from src.retrieval import RetrievedChunk, article_ids, search, to_chunk
+from src.config import CHROMA_DIR, OBLIGATION_ARTICLES, OBLIGATIONS_K, TOP_K
+from src.retrieval import RetrievedChunk, article_ids, search, search_with_obligations, to_chunk
 
 needs_index = pytest.mark.skipif(not CHROMA_DIR.exists(), reason="index absent : python -m scripts.build_index")
 
@@ -43,6 +43,20 @@ def test_search_renvoie_k_resultats_tries(strategy):
     scores = [r.score for r in results]
     assert scores == sorted(scores, reverse=True)
     assert all(r.chunk.strategy == strategy for r in results)
+
+
+@needs_index
+def test_recherche_restreinte_aux_articles_demandes():
+    results = search("tri automatique de CV", k=5, strategy="article", article_ids=("art_26", "art_14"))
+    assert results and article_ids(results) <= {"art_26", "art_14"}
+
+
+@needs_index
+def test_search_with_obligations_ajoute_des_articles_d_obligations():
+    results = search_with_obligations("tri automatique de CV pour un recrutement", strategy="article")
+    assert len(results) == TOP_K + OBLIGATIONS_K
+    assert len({r.chunk.chunk_id for r in results}) == len(results)
+    assert {r.chunk.article_id for r in results[TOP_K:]} <= set(OBLIGATION_ARTICLES)
 
 
 @needs_index

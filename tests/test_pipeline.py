@@ -42,7 +42,8 @@ def fake_env(monkeypatch):
             raise answer
         return answer
 
-    monkeypatch.setattr(retrieval, "search", lambda *a, **k: [retrieved("anx_III"), retrieved("art_26")])
+    monkeypatch.setattr(retrieval, "search", lambda *a, **k: [retrieved("anx_III")])
+    monkeypatch.setattr(retrieval, "search_with_obligations", lambda *a, **k: [retrieved("anx_III"), retrieved("art_26")])
     monkeypatch.setattr(security, "check_topic", lambda d: InputCheck("ok"))
     monkeypatch.setattr(clarification, "check", lambda d: clarification.Clarification([], []))
     monkeypatch.setattr(generation, "assess", fake_assess)
@@ -86,6 +87,22 @@ def test_succes_premier_essai(fake_env):
     result = pipeline.assess(DESCRIPTION)
     assert result.status == "ok" and result.attempts == 1
     assert [s.chunk.article_id for s in result.sources] == ["anx_III", "art_26"]
+
+
+def test_sans_recherche_obligations(fake_env):
+    answers, _ = fake_env
+    answers.append(make_assessment())
+    result = pipeline.assess(DESCRIPTION, obligations=False)
+    assert [s.chunk.article_id for s in result.sources] == ["anx_III"]
+
+
+def test_retry_si_aucune_citation(fake_env):
+    answers, calls = fake_env
+    no_citation = make_assessment().model_copy(update={"citations": []})
+    answers.extend([no_citation, make_assessment()])
+    result = pipeline.assess(DESCRIPTION)
+    assert result.status == "ok" and result.attempts == 2
+    assert "aucune citation" in calls[1]
 
 
 def test_injection_bloquee_sans_appel_llm(fake_env):

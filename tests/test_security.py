@@ -107,6 +107,13 @@ def test_citations_valides():
     assert validate_citations(assessment(["anx_III"], ["art_26"]), results) is None
 
 
+def test_au_moins_une_citation_sauf_indetermine():
+    results = [retrieved("anx_III")]
+    empty = assessment([], [])
+    assert "aucune citation" in validate_citations(empty, results)
+    assert validate_citations(empty.model_copy(update={"risk_level": "indetermine"}), results) is None
+
+
 def test_citation_hors_extraits_dans_les_obligations():
     results = [retrieved("anx_III")]
     assert invalid_citations(assessment(["anx_III"], ["art_43"]), results) == {"art_43"}

@@ -32,6 +32,16 @@ COLLECTION_PREFIX = "ai_act_"
 
 # Retrieval et génération
 TOP_K = 8
+OBLIGATIONS_K = 4  # chunks supplémentaires tirés des seuls articles d'obligations
+# Articles qui imposent des obligations aux opérateurs : maîtrise de l'IA, exigences et obligations
+# haut risque (chap. III, sect. 2-3), conformité et enregistrement, transparence, modèles à usage général,
+# surveillance après commercialisation et incidents.
+OBLIGATION_ARTICLES = (
+    "art_4",
+    *(f"art_{n}" for n in range(8, 28)),
+    "art_43", "art_47", "art_48", "art_49", "art_50",
+    "art_53", "art_55", "art_72", "art_73",
+)
 LLM_TEMPERATURE = 0.0
 LLM_MAX_TOKENS = 2000
 LLM_TIMEOUT_S = 60

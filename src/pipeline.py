@@ -86,11 +86,19 @@ def assess(
     clarify: bool = True,
     strategy: ChunkStrategy | None = None,
     k: int = TOP_K,
+    obligations: bool = True,
 ) -> PipelineResult:
-    """Pipeline complet. `defenses=False` désactive filtre d'entrée et validation des citations (éval)."""
+    """Pipeline complet.
+
+    `defenses=False` désactive filtre d'entrée et validation des citations (éval) ;
+    `obligations=False` supprime la recherche complémentaire dans les articles d'obligations.
+    """
     if defenses and (refusal := screen(description)):
         return refusal
     if clarify and (questions := ask_clarification(description)):
         return questions
-    sources = retrieval.search(description, k=k, strategy=strategy)
+    if obligations:
+        sources = retrieval.search_with_obligations(description, k=k, strategy=strategy)
+    else:
+        sources = retrieval.search(description, k=k, strategy=strategy)
     return generate(description, sources, defenses)

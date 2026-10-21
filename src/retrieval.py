@@ -13,7 +13,15 @@ import chromadb
 from chromadb.api.models.Collection import Collection
 
 from src.chunking import METADATA_FIELDS, Chunk
-from src.config import CHROMA_DIR, TOP_K, ChunkStrategy, collection_name, settings
+from src.config import (
+    CHROMA_DIR,
+    OBLIGATION_ARTICLES,
+    OBLIGATIONS_K,
+    TOP_K,
+    ChunkStrategy,
+    collection_name,
+    settings,
+)
 from src.embeddings import embed_query
 
 
@@ -58,16 +66,35 @@ def to_chunk(chunk_id: str, text: str, metadata: dict) -> Chunk:
     return Chunk(chunk_id=chunk_id, text=text, **fields)
 
 
-def search(query: str, k: int = TOP_K, strategy: ChunkStrategy | None = None) -> list[RetrievedChunk]:
-    """Top-k chunks les plus proches de la requête, du plus au moins similaire."""
+def search(
+    query: str,
+    k: int = TOP_K,
+    strategy: ChunkStrategy | None = None,
+    article_ids: tuple[str, ...] | None = None,
+) -> list[RetrievedChunk]:
+    """Top-k chunks les plus proches de la requête ; `article_ids` restreint la recherche à ces articles."""
     collection = get_collection(strategy or settings.chunk_strategy)
     result = collection.query(
         query_embeddings=[embed_query(query)],
         n_results=k,
+        where={"article_id": {"$in": list(article_ids)}} if article_ids else None,
         include=["documents", "metadatas", "distances"],
     )
     rows = zip(result["ids"][0], result["documents"][0], result["metadatas"][0], result["distances"][0])
     return [RetrievedChunk(to_chunk(cid, doc, meta), 1 - dist) for cid, doc, meta, dist in rows]
+
+
+def search_with_obligations(
+    query: str,
+    k: int = TOP_K,
+    k_obligations: int = OBLIGATIONS_K,
+    strategy: ChunkStrategy | None = None,
+) -> list[RetrievedChunk]:
+    """Recherche principale + recherche restreinte aux articles d'obligations, sans doublon."""
+    primary = search(query, k, strategy)
+    seen = {r.chunk.chunk_id for r in primary}
+    extra = search(query, k_obligations + len(primary), strategy, OBLIGATION_ARTICLES)
+    return primary + [r for r in extra if r.chunk.chunk_id not in seen][:k_obligations]
 
 
 def article_ids(results: list[RetrievedChunk]) -> set[str]:
