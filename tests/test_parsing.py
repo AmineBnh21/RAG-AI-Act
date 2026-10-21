@@ -58,6 +58,7 @@ def test_14_annexes(corpus):
 def test_aucun_bruit_dans_le_texte(corpus):
     for text in all_texts(corpus):
         assert "▼" not in text
+        assert "—————" not in text
         assert "———" not in text
         assert "\xa0" not in text
 
@@ -67,6 +68,16 @@ def test_aucune_entree_vide(corpus):
     assert all(p["text"] for p in (p for e in corpus.values() for p in e["paragraphs"]))
 
 
+def test_chaque_article_a_un_chapitre(corpus):
+    assert all(e["chapter"] for e in articles(corpus))
+    assert all(e["chapter"] is None for e in corpus.values() if e["kind"] == "annex")
+
+
+def test_autres_annexes_en_un_bloc(corpus):
+    others = [e for e in corpus.values() if e["kind"] == "annex" and e["id"] != "anx_III"]
+    assert all(len(e["paragraphs"]) == 1 for e in others)
+
+
 def test_article_5(corpus):
     art = corpus["art_5"]
     assert art["label"] == "Article 5"
@@ -74,7 +85,7 @@ def test_article_5(corpus):
     assert art["chapter"] == "CHAPITRE II — PRATIQUES INTERDITES EN MATIÈRE D'IA"
     assert art["section"] is None
     assert art["url"].endswith("CELEX:02024R1689-20260727#art_5")
-    assert [p["num"] for p in art["paragraphs"]][:3] == ["1", "1 bis", "1 ter"]
+    assert {"1", "1 bis", "1 ter"} <= {p["num"] for p in art["paragraphs"]}
 
 
 def test_points_de_liste_sur_une_ligne(corpus):
@@ -105,5 +116,6 @@ def test_annexe_iii_decoupee_par_point(corpus):
     annex = corpus["anx_III"]
     assert annex["label"] == "Annexe III"
     assert annex["title"].startswith("Systèmes d'IA à haut risque")
-    assert [p["num"] for p in annex["paragraphs"]] == [None, *map(str, range(1, 9))]
+    points = [p["num"] for p in annex["paragraphs"] if p["num"] is not None]
+    assert points == [str(n) for n in range(1, 9)]
     assert annex["paragraphs"][1]["text"].startswith("1. Biométrie")

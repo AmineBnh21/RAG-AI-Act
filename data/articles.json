@@ -3680,43 +3680,7 @@
     "paragraphs": [
       {
         "num": null,
-        "text": "La documentation technique visée à l'article 11, paragraphe 1, contient au moins les informations ci-après, selon le système d'IA concerné:"
-      },
-      {
-        "num": "1",
-        "text": "1. une description générale du système d'IA, y compris:\na) la destination, le nom du fournisseur et la version du système, faisant apparaître sa relation aux versions précédentes;\nb) la manière dont le système d'IA interagit ou peut être utilisé pour interagir avec du matériel informatique ou des logiciels, y compris avec d'autres systèmes d'IA, qui ne font pas partie du système d'IA lui-même, le cas échéant;\nc) les versions des logiciels ou des micrologiciels pertinents et toute exigence relative aux mises à jour de la version;\nd) la description de toutes les formes sous lesquelles le système d'IA est mis sur le marché ou mis en service, telles que les packs logiciels intégrés dans du matériel informatique, les téléchargements ou les API;\ne) la description du matériel informatique sur lequel le système d'IA est destiné à être exécuté;\nf) lorsque le système d'IA est un composant de produits, des photographies ou des illustrations montrant les caractéristiques externes, le marquage et la disposition interne de ces produits;\ng) une description de base de l'interface utilisateur fournie au déployeur;\nh) une notice d'utilisation à l'intention du déployeur et une description de base de l'interface utilisateur fournie au déployeur, le cas échéant;"
-      },
-      {
-        "num": "2",
-        "text": "2. une description détaillée des éléments du système d'IA et de son processus de développement, y compris:\na) les méthodes et étapes suivies pour le développement du système d'IA, y compris, le cas échéant, le recours à des systèmes ou outils pré-entraînés fournis par des tiers et la manière dont ceux-ci ont été utilisés, intégrés ou modifiés par le fournisseur;\nb) les spécifications de conception du système, à savoir la logique générale du système d'IA et des algorithmes; les principaux choix de conception, y compris le raisonnement et les hypothèses retenues, y compris en ce qui concerne les personnes ou les groupes de personnes à l'égard desquels le système est destiné à être utilisé; les principaux choix de classification; ce que le système est conçu pour optimiser, ainsi que la pertinence des différents paramètres; la description des sorties attendues du système et de leur qualité; les décisions relatives aux compromis éventuels en ce qui concerne les solutions techniques adoptées pour se conformer aux exigences énoncées au chapitre III, section 2;\nc) la description de l'architecture du système expliquant la manière dont les composants logiciels s'utilisent et s'alimentent les uns les autres ou s'intègrent dans le traitement global; les ressources informatiques utilisées pour développer, entraîner, mettre à l'essai et valider le système d'IA;\nd) le cas échéant, les exigences relatives aux données en ce qui concerne les fiches décrivant les méthodes et techniques d'entraînement et les jeux de données d'entraînement utilisés, y compris une description générale de ces jeux de données et des informations sur leur provenance, leur portée et leurs principales caractéristiques; la manière dont les données ont été obtenues et sélectionnées; les procédures d'étiquetage (par exemple pour l'apprentissage supervisé), les méthodes de nettoyage des données (par exemple la détection des valeurs aberrantes);\ne) l'évaluation des mesures de contrôle humain nécessaires conformément à l'article 14, y compris une évaluation des mesures techniques nécessaires pour faciliter l'interprétation par les déployeurs des sorties des systèmes d'IA, conformément à l'article 13, paragraphe 3, point d);\nf) le cas échéant, une description détaillée des modifications prédéterminées du système d'IA et de ses performances, ainsi que toutes les informations pertinentes relatives aux solutions techniques adoptées pour garantir que continue d'être assurée la conformité du système d'IA aux les exigences pertinentes énoncées au chapitre III, section 2;\ng) les procédures de validation et d'essai utilisées, y compris les informations sur les données de validation et d'essai utilisées et leurs principales caractéristiques; les indicateurs utilisés pour mesurer l'exactitude, la robustesse et le respect des autres exigences pertinentes énoncées au chapitre III, section 2, ainsi que les éventuelles incidences discriminatoires; les journaux de test et tous les rapports de test datés et signés par les personnes responsables, y compris en ce qui concerne les modifications prédéterminées visées au point f);\nh) les mesures de cybersécurité qui ont été prises;"
-      },
-      {
-        "num": "3",
-        "text": "3. des informations détaillées sur la surveillance, le fonctionnement et le contrôle du système d'IA, en particulier en ce qui concerne: les capacités et les limites du système sur le plan de sa performance, y compris le degré d'exactitude pour des personnes ou des groupes de personnes spécifiques à l'égard desquels le système est destiné à être utilisé et le niveau global d'exactitude prévu par rapport à sa destination; les résultats non intentionnels et sources de risques prévisibles pour la santé et la sécurité, les droits fondamentaux et en termes de discrimination compte tenu de la destination du système d'IA; les mesures de contrôle humain nécessaires conformément à l'article 14, y compris les mesures techniques mises en place pour faciliter l'interprétation par les déployeurs des sorties des systèmes d'IA; les spécifications concernant les données d'entrée, le cas échéant;"
-      },
-      {
-        "num": "4",
-        "text": "4. une description de l'adéquation des indicateurs de performance à ce système d'IA spécifique;"
-      },
-      {
-        "num": "5",
-        "text": "5. une description détaillée du système de gestion des risques conformément à l'article 9;"
-      },
-      {
-        "num": "6",
-        "text": "6. une description des modifications pertinentes apportées par le fournisseur au système tout au long de son cycle de vie;"
-      },
-      {
-        "num": "7",
-        "text": "7. une liste des normes harmonisées appliquées, en totalité ou en partie, dont les références ont été publiées au Journal officiel de l'Union européenne; lorsqu'aucune norme harmonisée de ce type n'a été appliquée, une description détaillée des solutions adoptées pour satisfaire aux exigences énoncées au chapitre III, section 2, y compris une liste des autres normes pertinentes et spécifications techniques appliquées;"
-      },
-      {
-        "num": "8",
-        "text": "8. une copie de la déclaration UE de conformité visée à l'article 47;"
-      },
-      {
-        "num": "9",
-        "text": "9. une description détaillée du système en place pour évaluer les performances du système d'IA après la commercialisation conformément à l'article 72, y compris le plan de surveillance après commercialisation visé à l'article 72, paragraphe 3."
+        "text": "La documentation technique visée à l'article 11, paragraphe 1, contient au moins les informations ci-après, selon le système d'IA concerné:\n1. une description générale du système d'IA, y compris:\na) la destination, le nom du fournisseur et la version du système, faisant apparaître sa relation aux versions précédentes;\nb) la manière dont le système d'IA interagit ou peut être utilisé pour interagir avec du matériel informatique ou des logiciels, y compris avec d'autres systèmes d'IA, qui ne font pas partie du système d'IA lui-même, le cas échéant;\nc) les versions des logiciels ou des micrologiciels pertinents et toute exigence relative aux mises à jour de la version;\nd) la description de toutes les formes sous lesquelles le système d'IA est mis sur le marché ou mis en service, telles que les packs logiciels intégrés dans du matériel informatique, les téléchargements ou les API;\ne) la description du matériel informatique sur lequel le système d'IA est destiné à être exécuté;\nf) lorsque le système d'IA est un composant de produits, des photographies ou des illustrations montrant les caractéristiques externes, le marquage et la disposition interne de ces produits;\ng) une description de base de l'interface utilisateur fournie au déployeur;\nh) une notice d'utilisation à l'intention du déployeur et une description de base de l'interface utilisateur fournie au déployeur, le cas échéant;\n2. une description détaillée des éléments du système d'IA et de son processus de développement, y compris:\na) les méthodes et étapes suivies pour le développement du système d'IA, y compris, le cas échéant, le recours à des systèmes ou outils pré-entraînés fournis par des tiers et la manière dont ceux-ci ont été utilisés, intégrés ou modifiés par le fournisseur;\nb) les spécifications de conception du système, à savoir la logique générale du système d'IA et des algorithmes; les principaux choix de conception, y compris le raisonnement et les hypothèses retenues, y compris en ce qui concerne les personnes ou les groupes de personnes à l'égard desquels le système est destiné à être utilisé; les principaux choix de classification; ce que le système est conçu pour optimiser, ainsi que la pertinence des différents paramètres; la description des sorties attendues du système et de leur qualité; les décisions relatives aux compromis éventuels en ce qui concerne les solutions techniques adoptées pour se conformer aux exigences énoncées au chapitre III, section 2;\nc) la description de l'architecture du système expliquant la manière dont les composants logiciels s'utilisent et s'alimentent les uns les autres ou s'intègrent dans le traitement global; les ressources informatiques utilisées pour développer, entraîner, mettre à l'essai et valider le système d'IA;\nd) le cas échéant, les exigences relatives aux données en ce qui concerne les fiches décrivant les méthodes et techniques d'entraînement et les jeux de données d'entraînement utilisés, y compris une description générale de ces jeux de données et des informations sur leur provenance, leur portée et leurs principales caractéristiques; la manière dont les données ont été obtenues et sélectionnées; les procédures d'étiquetage (par exemple pour l'apprentissage supervisé), les méthodes de nettoyage des données (par exemple la détection des valeurs aberrantes);\ne) l'évaluation des mesures de contrôle humain nécessaires conformément à l'article 14, y compris une évaluation des mesures techniques nécessaires pour faciliter l'interprétation par les déployeurs des sorties des systèmes d'IA, conformément à l'article 13, paragraphe 3, point d);\nf) le cas échéant, une description détaillée des modifications prédéterminées du système d'IA et de ses performances, ainsi que toutes les informations pertinentes relatives aux solutions techniques adoptées pour garantir que continue d'être assurée la conformité du système d'IA aux les exigences pertinentes énoncées au chapitre III, section 2;\ng) les procédures de validation et d'essai utilisées, y compris les informations sur les données de validation et d'essai utilisées et leurs principales caractéristiques; les indicateurs utilisés pour mesurer l'exactitude, la robustesse et le respect des autres exigences pertinentes énoncées au chapitre III, section 2, ainsi que les éventuelles incidences discriminatoires; les journaux de test et tous les rapports de test datés et signés par les personnes responsables, y compris en ce qui concerne les modifications prédéterminées visées au point f);\nh) les mesures de cybersécurité qui ont été prises;\n3. des informations détaillées sur la surveillance, le fonctionnement et le contrôle du système d'IA, en particulier en ce qui concerne: les capacités et les limites du système sur le plan de sa performance, y compris le degré d'exactitude pour des personnes ou des groupes de personnes spécifiques à l'égard desquels le système est destiné à être utilisé et le niveau global d'exactitude prévu par rapport à sa destination; les résultats non intentionnels et sources de risques prévisibles pour la santé et la sécurité, les droits fondamentaux et en termes de discrimination compte tenu de la destination du système d'IA; les mesures de contrôle humain nécessaires conformément à l'article 14, y compris les mesures techniques mises en place pour faciliter l'interprétation par les déployeurs des sorties des systèmes d'IA; les spécifications concernant les données d'entrée, le cas échéant;\n4. une description de l'adéquation des indicateurs de performance à ce système d'IA spécifique;\n5. une description détaillée du système de gestion des risques conformément à l'article 9;\n6. une description des modifications pertinentes apportées par le fournisseur au système tout au long de son cycle de vie;\n7. une liste des normes harmonisées appliquées, en totalité ou en partie, dont les références ont été publiées au Journal officiel de l'Union européenne; lorsqu'aucune norme harmonisée de ce type n'a été appliquée, une description détaillée des solutions adoptées pour satisfaire aux exigences énoncées au chapitre III, section 2, y compris une liste des autres normes pertinentes et spécifications techniques appliquées;\n8. une copie de la déclaration UE de conformité visée à l'article 47;\n9. une description détaillée du système en place pour évaluer les performances du système d'IA après la commercialisation conformément à l'article 72, y compris le plan de surveillance après commercialisation visé à l'article 72, paragraphe 3."
       }
     ]
   },
@@ -3731,39 +3695,7 @@
     "paragraphs": [
       {
         "num": null,
-        "text": "La déclaration UE de conformité visée à l'article 47 contient l'ensemble des informations suivantes:"
-      },
-      {
-        "num": "1",
-        "text": "1. le nom et le type du système d'IA et toute référence supplémentaire non équivoque permettant l'identification et la traçabilité du système d'IA;"
-      },
-      {
-        "num": "2",
-        "text": "2. le nom et l'adresse du fournisseur ou, le cas échéant, de son mandataire;"
-      },
-      {
-        "num": "3",
-        "text": "3. une attestation certifiant que la déclaration UE de conformité visée à l'article 47 est établie sous la seule responsabilité du fournisseur;"
-      },
-      {
-        "num": "4",
-        "text": "4. une déclaration attestant que le système d'IA respecte le présent règlement et, le cas échéant, toute autre législation de l'Union applicable prévoyant l'établissement de la déclaration UE de conformité visée à l'article 47;"
-      },
-      {
-        "num": "5",
-        "text": "5. lorsqu'un système d'IA nécessite le traitement de données à caractère personnel, une déclaration qui atteste que ledit système d'IA est conforme aux règlements (UE) 2016/679 et (UE) 2018/1725 ainsi qu'à la directive (UE) 2016/680;"
-      },
-      {
-        "num": "6",
-        "text": "6. des références aux éventuelles normes harmonisées pertinentes utilisées ou aux éventuelles autres spécifications communes par rapport auxquelles la conformité est déclarée;"
-      },
-      {
-        "num": "7",
-        "text": "7. le cas échéant, le nom et le numéro d'identification de l'organisme notifié, une description de la procédure d'évaluation de la conformité suivie et la référence du certificat délivré;"
-      },
-      {
-        "num": "8",
-        "text": "8. le lieu et la date de délivrance de la déclaration, le nom et la fonction du signataire ainsi que la mention de la personne pour le compte de laquelle ce dernier a signé, et une signature."
+        "text": "La déclaration UE de conformité visée à l'article 47 contient l'ensemble des informations suivantes:\n1. le nom et le type du système d'IA et toute référence supplémentaire non équivoque permettant l'identification et la traçabilité du système d'IA;\n2. le nom et l'adresse du fournisseur ou, le cas échéant, de son mandataire;\n3. une attestation certifiant que la déclaration UE de conformité visée à l'article 47 est établie sous la seule responsabilité du fournisseur;\n4. une déclaration attestant que le système d'IA respecte le présent règlement et, le cas échéant, toute autre législation de l'Union applicable prévoyant l'établissement de la déclaration UE de conformité visée à l'article 47;\n5. lorsqu'un système d'IA nécessite le traitement de données à caractère personnel, une déclaration qui atteste que ledit système d'IA est conforme aux règlements (UE) 2016/679 et (UE) 2018/1725 ainsi qu'à la directive (UE) 2016/680;\n6. des références aux éventuelles normes harmonisées pertinentes utilisées ou aux éventuelles autres spécifications communes par rapport auxquelles la conformité est déclarée;\n7. le cas échéant, le nom et le numéro d'identification de l'organisme notifié, une description de la procédure d'évaluation de la conformité suivie et la référence du certificat délivré;\n8. le lieu et la date de délivrance de la déclaration, le nom et la fonction du signataire ainsi que la mention de la personne pour le compte de laquelle ce dernier a signé, et une signature."
       }
     ]
   },
@@ -3808,107 +3740,7 @@
     "paragraphs": [
       {
         "num": null,
-        "text": "Section A - Informations à fournir par les fournisseurs de systèmes d'IA à haut risque conformément à l'article 49, paragraphe 1\nLes informations ci-après sont fournies et mises à jour par la suite en ce qui concerne les systèmes d'IA à haut risque à enregistrer conformément à l'article 49, paragraphe 1:"
-      },
-      {
-        "num": "1",
-        "text": "1. le nom, l'adresse et les coordonnées du fournisseur;"
-      },
-      {
-        "num": "2",
-        "text": "2. lorsque la soumission d'informations est effectuée par une autre personne pour le compte du fournisseur, le nom, l'adresse et les coordonnées de cette personne;"
-      },
-      {
-        "num": "3",
-        "text": "3. le nom, l'adresse et les coordonnées du mandataire, le cas échéant;"
-      },
-      {
-        "num": "4",
-        "text": "4. la dénomination commerciale du système d'IA et toute référence supplémentaire non équivoque permettant l'identification et la traçabilité du système d'IA;"
-      },
-      {
-        "num": "5",
-        "text": "5. une description de la destination du système d'IA ainsi que des composants et fonctions gérées au moyen de ce système d'IA;"
-      },
-      {
-        "num": "6",
-        "text": "6. une description de base et concise des informations utilisées par le système (données, entrées) et de sa logique de fonctionnement;"
-      },
-      {
-        "num": "7",
-        "text": "7. le statut du système d'IA (sur le marché ou en service; plus mis sur le marché/en service, rappelé);"
-      },
-      {
-        "num": "8",
-        "text": "8. le type, le numéro et la date d'expiration du certificat délivré par l'organisme notifié et le nom ou le numéro d'identification de cet organisme notifié, le cas échéant;"
-      },
-      {
-        "num": "9",
-        "text": "9. une copie numérisée du certificat visé au point 8, le cas échéant;"
-      },
-      {
-        "num": "10",
-        "text": "10. tout État membre dans lequel le système d'IA a été mis sur le marché, mis en service ou mis à disposition dans l'Union;"
-      },
-      {
-        "num": "11",
-        "text": "11. une copie de la déclaration UE de conformité visée à l'article 47;"
-      },
-      {
-        "num": "12",
-        "text": "12. une notice d'utilisation en format électronique; ces informations ne sont pas à fournir pour les systèmes d'IA à haut risque dans les domaines des activités répressives ou de la migration, de l'asile et de la gestion des contrôles aux frontières visés à l'annexe III, points 1, 6 et 7;"
-      },
-      {
-        "num": "13",
-        "text": "13. une adresse URL vers des informations supplémentaires (facultatif).\nSection B - Informations à fournir par les fournisseurs de systèmes d'IA à haut risque conformément à l'article 49, paragraphe 2\nLes informations ci-après sont fournies et mises à jour par la suite en ce qui concerne les systèmes d'IA à enregistrer conformément à l'article 49, paragraphe 2:"
-      },
-      {
-        "num": "1",
-        "text": "1. le nom, l'adresse et les coordonnées du fournisseur;"
-      },
-      {
-        "num": "2",
-        "text": "2. lorsque la soumission d'informations est effectuée par une autre personne pour le compte du fournisseur, le nom, l'adresse et les coordonnées de cette personne;"
-      },
-      {
-        "num": "3",
-        "text": "3. le nom, l'adresse et les coordonnées du mandataire, le cas échéant;"
-      },
-      {
-        "num": "4",
-        "text": "4. la dénomination commerciale du système d'IA et toute référence supplémentaire non équivoque permettant l'identification et la traçabilité du système d'IA;"
-      },
-      {
-        "num": "5",
-        "text": "5. une description de la destination du système d'IA;"
-      },
-      {
-        "num": "6",
-        "text": "6. la ou les conditions visées à l'article 6, paragraphe 3, sur la base desquelles le système d'IA est considéré comme n'étant pas à haut risque;"
-      },
-      {
-        "num": "8",
-        "text": "8. le statut du système d'IA (sur le marché ou en service; plus sur le marché/en service, rappelé).\nSection C - Informations à fournir par les déployeurs de systèmes d'IA à haut risque conformément à l'article 49, paragraphe 3\nLes informations ci-après sont fournies et mises à jour par la suite en ce qui concerne les systèmes d'IA à haut risque à enregistrer conformément à l'article 49, paragraphe 3:"
-      },
-      {
-        "num": "1",
-        "text": "1. le nom, l'adresse et les coordonnées du déployeur;"
-      },
-      {
-        "num": "2",
-        "text": "2. le nom, l'adresse et les coordonnées de toute personne qui soumet des informations au nom du déployeur;"
-      },
-      {
-        "num": "3",
-        "text": "3. l'adresse URL de l'entrée du système d'IA dans la base de données de l'UE par son fournisseur;"
-      },
-      {
-        "num": "4",
-        "text": "4. une synthèse des conclusions de l'analyse d'impact sur les droits fondamentaux réalisée conformément à l'article 27;"
-      },
-      {
-        "num": "5",
-        "text": "5. un résumé de l'analyse d'impact relative à la protection des données réalisée en application de l'article 35 du règlement (UE) 2016/679 ou de l'article 27 de la directive (UE) 2016/680, comme précisé à l'article 26, paragraphe 8, du présent règlement, le cas échéant."
+        "text": "Section A - Informations à fournir par les fournisseurs de systèmes d'IA à haut risque conformément à l'article 49, paragraphe 1\nLes informations ci-après sont fournies et mises à jour par la suite en ce qui concerne les systèmes d'IA à haut risque à enregistrer conformément à l'article 49, paragraphe 1:\n1. le nom, l'adresse et les coordonnées du fournisseur;\n2. lorsque la soumission d'informations est effectuée par une autre personne pour le compte du fournisseur, le nom, l'adresse et les coordonnées de cette personne;\n3. le nom, l'adresse et les coordonnées du mandataire, le cas échéant;\n4. la dénomination commerciale du système d'IA et toute référence supplémentaire non équivoque permettant l'identification et la traçabilité du système d'IA;\n5. une description de la destination du système d'IA ainsi que des composants et fonctions gérées au moyen de ce système d'IA;\n6. une description de base et concise des informations utilisées par le système (données, entrées) et de sa logique de fonctionnement;\n7. le statut du système d'IA (sur le marché ou en service; plus mis sur le marché/en service, rappelé);\n8. le type, le numéro et la date d'expiration du certificat délivré par l'organisme notifié et le nom ou le numéro d'identification de cet organisme notifié, le cas échéant;\n9. une copie numérisée du certificat visé au point 8, le cas échéant;\n10. tout État membre dans lequel le système d'IA a été mis sur le marché, mis en service ou mis à disposition dans l'Union;\n11. une copie de la déclaration UE de conformité visée à l'article 47;\n12. une notice d'utilisation en format électronique; ces informations ne sont pas à fournir pour les systèmes d'IA à haut risque dans les domaines des activités répressives ou de la migration, de l'asile et de la gestion des contrôles aux frontières visés à l'annexe III, points 1, 6 et 7;\n13. une adresse URL vers des informations supplémentaires (facultatif).\nSection B - Informations à fournir par les fournisseurs de systèmes d'IA à haut risque conformément à l'article 49, paragraphe 2\nLes informations ci-après sont fournies et mises à jour par la suite en ce qui concerne les systèmes d'IA à enregistrer conformément à l'article 49, paragraphe 2:\n1. le nom, l'adresse et les coordonnées du fournisseur;\n2. lorsque la soumission d'informations est effectuée par une autre personne pour le compte du fournisseur, le nom, l'adresse et les coordonnées de cette personne;\n3. le nom, l'adresse et les coordonnées du mandataire, le cas échéant;\n4. la dénomination commerciale du système d'IA et toute référence supplémentaire non équivoque permettant l'identification et la traçabilité du système d'IA;\n5. une description de la destination du système d'IA;\n6. la ou les conditions visées à l'article 6, paragraphe 3, sur la base desquelles le système d'IA est considéré comme n'étant pas à haut risque;\n8. le statut du système d'IA (sur le marché ou en service; plus sur le marché/en service, rappelé).\nSection C - Informations à fournir par les déployeurs de systèmes d'IA à haut risque conformément à l'article 49, paragraphe 3\nLes informations ci-après sont fournies et mises à jour par la suite en ce qui concerne les systèmes d'IA à haut risque à enregistrer conformément à l'article 49, paragraphe 3:\n1. le nom, l'adresse et les coordonnées du déployeur;\n2. le nom, l'adresse et les coordonnées de toute personne qui soumet des informations au nom du déployeur;\n3. l'adresse URL de l'entrée du système d'IA dans la base de données de l'UE par son fournisseur;\n4. une synthèse des conclusions de l'analyse d'impact sur les droits fondamentaux réalisée conformément à l'article 27;\n5. un résumé de l'analyse d'impact relative à la protection des données réalisée en application de l'article 35 du règlement (UE) 2016/679 ou de l'article 27 de la directive (UE) 2016/680, comme précisé à l'article 26, paragraphe 8, du présent règlement, le cas échéant."
       }
     ]
   },
@@ -3923,27 +3755,7 @@
     "paragraphs": [
       {
         "num": null,
-        "text": "Les informations ci-après sont fournies et mises à jour par la suite en ce qui concerne les essais en conditions réelles à enregistrer conformément à l'article 60:"
-      },
-      {
-        "num": "1",
-        "text": "1. un numéro d'identification unique à l'échelle de l'Union des essais en conditions réelles;"
-      },
-      {
-        "num": "2",
-        "text": "2. le nom et les coordonnées du fournisseur ou du fournisseur potentiel et des déployeurs participant aux essais en conditions réelles;"
-      },
-      {
-        "num": "3",
-        "text": "3. une brève description du système d'IA et de sa destination, ainsi que d'autres informations nécessaires à l'identification du système;"
-      },
-      {
-        "num": "4",
-        "text": "4. une synthèse des caractéristiques principales du plan d'essais en conditions réelles;"
-      },
-      {
-        "num": "5",
-        "text": "5. des informations sur la suspension ou la cessation des essais en conditions réelles."
+        "text": "Les informations ci-après sont fournies et mises à jour par la suite en ce qui concerne les essais en conditions réelles à enregistrer conformément à l'article 60:\n1. un numéro d'identification unique à l'échelle de l'Union des essais en conditions réelles;\n2. le nom et les coordonnées du fournisseur ou du fournisseur potentiel et des déployeurs participant aux essais en conditions réelles;\n3. une brève description du système d'IA et de sa destination, ainsi que d'autres informations nécessaires à l'identification du système;\n4. une synthèse des caractéristiques principales du plan d'essais en conditions réelles;\n5. des informations sur la suspension ou la cessation des essais en conditions réelles."
       }
     ]
   },
@@ -3973,15 +3785,7 @@
     "paragraphs": [
       {
         "num": null,
-        "text": "Section 1\nInformations devant être fournies par tous les fournisseurs de modèles d'IA à usage général\nLa documentation technique visée à l'article 53, paragraphe 1, point a), contient au moins les informations ci-après, en fonction de la taille et du profil de risque du modèle:"
-      },
-      {
-        "num": "1",
-        "text": "1. Une description générale du modèle d'IA à usage général, y compris:\na) les tâches que le modèle est censé accomplir ainsi que le type et la nature des systèmes d'IA dans lesquels il peut être intégré;\nb) les politiques applicables en matière d'utilisation acceptable;\nc) la date de publication et les méthodes de distribution;\nd) l'architecture et le nombre de paramètres;\ne) les modalités (p. ex.: texte, image) et le format des entrées et des sorties;\nf) la licence."
-      },
-      {
-        "num": "2",
-        "text": "2. Une description détaillée des éléments du modèle visés au point 1, et des informations pertinentes sur le processus de développement, y compris les éléments suivants:\na) les moyens techniques (p. ex.: notice d'utilisation, infrastructure, outils) nécessaires à l'intégration du modèle d'IA à usage général dans les systèmes d'IA;\nb) les spécifications de conception du modèle et du processus d'entraînement, y compris les méthodes et techniques d'entraînement, les principaux choix de conception, y compris le raisonnement et les hypothèses retenues; ce que le modèle est conçu pour optimiser, ainsi que la pertinence des différents paramètres, le cas échéant;\nc) des informations sur les données utilisées pour l'entraînement, les essais et la validation, le cas échéant, y compris le type et la provenance des données et les méthodes d'organisation (p. ex.: nettoyage, filtrage, etc.), le nombre de points de données, leur portée et leurs principales caractéristiques; la manière dont les données ont été obtenues et sélectionnées, ainsi que toutes les autres mesures visant à détecter l'inadéquation des sources de données et les méthodes permettant de détecter les biais identifiables, le cas échéant;\nd) les ressources informatiques utilisées pour entraîner le modèle (p. ex.: nombre d'opérations en virgule flottante), le temps d'entraînement et d'autres détails pertinents liés à l'entraînement;\ne) la consommation d'énergie connue ou estimée du modèle.\nEn ce qui concerne le point e), lorsque la consommation d'énergie du modèle est inconnue, la consommation d'énergie peut être estimée en s'appuyant sur des informations concernant les ressources informatiques utilisées.\nSection 2\nInformations devant être fournies par les fournisseurs de modèles d'IA à usage général présentant un risque systémique\n1. Une description détaillée des stratégies d'évaluation, y compris les résultats de l'évaluation, sur la base des protocoles et outils d'évaluation publics disponibles ou d'autres méthodes d'évaluation. Les stratégies d'évaluation comprennent des critères, des indicateurs et les méthodes d'évaluation pour l'identification des limites.\n2. Le cas échéant, une description détaillée des mesures mises en place pour effectuer des essais contradictoires internes et/ou externes (p. ex.: méthode de l'équipe rouge), des adaptations de modèles, y compris l'alignement et le réglage fin.\n3. Le cas échéant, une description détaillée de l'architecture du système expliquant la manière dont les composants logiciels s'utilisent et s'alimentent les uns les autres ou s'intègrent dans le traitement global."
+        "text": "Section 1\nInformations devant être fournies par tous les fournisseurs de modèles d'IA à usage général\nLa documentation technique visée à l'article 53, paragraphe 1, point a), contient au moins les informations ci-après, en fonction de la taille et du profil de risque du modèle:\n1. Une description générale du modèle d'IA à usage général, y compris:\na) les tâches que le modèle est censé accomplir ainsi que le type et la nature des systèmes d'IA dans lesquels il peut être intégré;\nb) les politiques applicables en matière d'utilisation acceptable;\nc) la date de publication et les méthodes de distribution;\nd) l'architecture et le nombre de paramètres;\ne) les modalités (p. ex.: texte, image) et le format des entrées et des sorties;\nf) la licence.\n2. Une description détaillée des éléments du modèle visés au point 1, et des informations pertinentes sur le processus de développement, y compris les éléments suivants:\na) les moyens techniques (p. ex.: notice d'utilisation, infrastructure, outils) nécessaires à l'intégration du modèle d'IA à usage général dans les systèmes d'IA;\nb) les spécifications de conception du modèle et du processus d'entraînement, y compris les méthodes et techniques d'entraînement, les principaux choix de conception, y compris le raisonnement et les hypothèses retenues; ce que le modèle est conçu pour optimiser, ainsi que la pertinence des différents paramètres, le cas échéant;\nc) des informations sur les données utilisées pour l'entraînement, les essais et la validation, le cas échéant, y compris le type et la provenance des données et les méthodes d'organisation (p. ex.: nettoyage, filtrage, etc.), le nombre de points de données, leur portée et leurs principales caractéristiques; la manière dont les données ont été obtenues et sélectionnées, ainsi que toutes les autres mesures visant à détecter l'inadéquation des sources de données et les méthodes permettant de détecter les biais identifiables, le cas échéant;\nd) les ressources informatiques utilisées pour entraîner le modèle (p. ex.: nombre d'opérations en virgule flottante), le temps d'entraînement et d'autres détails pertinents liés à l'entraînement;\ne) la consommation d'énergie connue ou estimée du modèle.\nEn ce qui concerne le point e), lorsque la consommation d'énergie du modèle est inconnue, la consommation d'énergie peut être estimée en s'appuyant sur des informations concernant les ressources informatiques utilisées.\nSection 2\nInformations devant être fournies par les fournisseurs de modèles d'IA à usage général présentant un risque systémique\n1. Une description détaillée des stratégies d'évaluation, y compris les résultats de l'évaluation, sur la base des protocoles et outils d'évaluation publics disponibles ou d'autres méthodes d'évaluation. Les stratégies d'évaluation comprennent des critères, des indicateurs et les méthodes d'évaluation pour l'identification des limites.\n2. Le cas échéant, une description détaillée des mesures mises en place pour effectuer des essais contradictoires internes et/ou externes (p. ex.: méthode de l'équipe rouge), des adaptations de modèles, y compris l'alignement et le réglage fin.\n3. Le cas échéant, une description détaillée de l'architecture du système expliquant la manière dont les composants logiciels s'utilisent et s'alimentent les uns les autres ou s'intègrent dans le traitement global."
       }
     ]
   },
@@ -3996,15 +3800,7 @@
     "paragraphs": [
       {
         "num": null,
-        "text": "Les informations visées à l'article 53, paragraphe 1, point b) comprennent au moins:"
-      },
-      {
-        "num": "1",
-        "text": "1. Une description générale du modèle d'IA à usage général, y compris:\na) les tâches que le modèle est censé accomplir ainsi que le type et la nature des systèmes d'IA dans lesquels il peut être intégré;\nb) les politiques applicables en matière d'utilisation acceptable;\nc) la date de publication et les méthodes de distribution;\nd) la manière dont le modèle interagit ou peut être utilisé pour interagir avec du matériel informatique ou des logiciels qui ne font pas partie du modèle lui-même, le cas échéant;\ne) les versions des logiciels pertinents liés à l'utilisation du modèle d'IA à usage général, le cas échéant;\nf) l'architecture et le nombre de paramètres;\ng) les modalités (p. ex.: texte, image) et le format des entrées et des sorties;\nh) la licence pour le modèle."
-      },
-      {
-        "num": "2",
-        "text": "2. Une description des éléments du modèle et de son processus de développement, notamment:\na) les moyens techniques (p. ex.: la notice d'utilisation, l'infrastructure, les outils) nécessaires à l'intégration du modèle d'IA à usage général dans les systèmes d'IA;\nb) les modalités (p. ex.: texte, image, etc.) et le format des entrées et des sorties, ainsi que leur taille maximale (p. ex.: taille de la fenêtre de contexte, etc.);\nc) des informations sur les données utilisées pour l'entraînement, les essais et la validation, le cas échéant, y compris le type et la provenance des données et les méthodes d'organisation."
+        "text": "Les informations visées à l'article 53, paragraphe 1, point b) comprennent au moins:\n1. Une description générale du modèle d'IA à usage général, y compris:\na) les tâches que le modèle est censé accomplir ainsi que le type et la nature des systèmes d'IA dans lesquels il peut être intégré;\nb) les politiques applicables en matière d'utilisation acceptable;\nc) la date de publication et les méthodes de distribution;\nd) la manière dont le modèle interagit ou peut être utilisé pour interagir avec du matériel informatique ou des logiciels qui ne font pas partie du modèle lui-même, le cas échéant;\ne) les versions des logiciels pertinents liés à l'utilisation du modèle d'IA à usage général, le cas échéant;\nf) l'architecture et le nombre de paramètres;\ng) les modalités (p. ex.: texte, image) et le format des entrées et des sorties;\nh) la licence pour le modèle.\n2. Une description des éléments du modèle et de son processus de développement, notamment:\na) les moyens techniques (p. ex.: la notice d'utilisation, l'infrastructure, les outils) nécessaires à l'intégration du modèle d'IA à usage général dans les systèmes d'IA;\nb) les modalités (p. ex.: texte, image, etc.) et le format des entrées et des sorties, ainsi que leur taille maximale (p. ex.: taille de la fenêtre de contexte, etc.);\nc) des informations sur les données utilisées pour l'entraînement, les essais et la validation, le cas échéant, y compris le type et la provenance des données et les méthodes d'organisation."
       }
     ]
   },

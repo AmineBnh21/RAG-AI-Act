@@ -15,6 +15,7 @@ from src.config import ARTICLES_JSON, EURLEX_BASE_URL, SOURCE_HTML
 
 ARTICLE_ID = re.compile(r"^art_\w+$")
 ANNEX_ID = re.compile(r"^anx_[IVX]+$")
+SPLIT_ANNEX = "anx_III"  # seule annexe découpée par point ; les autres restent en un bloc
 ARTICLE_LABEL = re.compile(r"Article\s*(\d+)\s*(bis|ter|quater|quinquies|sexies)?", re.I)
 DELETION_MARK = re.compile(r"—{3,}")
 NOISE_SELECTORS = ["p.modref", "#TOC", "p.footnote", "script", ".arrow", "a.anchorarrow"]
@@ -186,6 +187,9 @@ def parse_annex(annex: Tag) -> dict:
         headings = annex.find_all("p", class_="title-annex-1", recursive=False)
         title_tag = headings[1] if len(headings) > 1 else None
     roman = annex["id"].removeprefix("anx_")
+    paragraphs = split_annex(annex)
+    if annex["id"] != SPLIT_ANNEX:
+        paragraphs = [{"num": None, "text": "\n".join(p["text"] for p in paragraphs)}]
     return {
         "id": annex["id"],
         "kind": "annex",
@@ -194,7 +198,7 @@ def parse_annex(annex: Tag) -> dict:
         "chapter": None,
         "section": None,
         "url": f"{EURLEX_BASE_URL}#{annex['id']}",
-        "paragraphs": split_annex(annex),
+        "paragraphs": paragraphs,
     }
 
 
