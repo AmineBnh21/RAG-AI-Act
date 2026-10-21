@@ -15,6 +15,7 @@ if TYPE_CHECKING:
     from src.schemas import Assessment
 
 INJECTION_THRESHOLD = 2
+UNCITED_RISK_LEVELS = {"risque_minimal", "indetermine"}  # niveaux admis sans citation
 RATE_LIMIT_KEY = "assessments_count"
 TOPIC_MAX_TOKENS = 100
 
@@ -129,9 +130,10 @@ def invalid_citations(assessment: Assessment, results: list[RetrievedChunk]) -> 
 def validate_citations(assessment: Assessment, results: list[RetrievedChunk]) -> str | None:
     """None si les citations sont présentes et justifiées, sinon un message d'erreur pour le retry.
 
-    Toute conclusion autre que « indetermine » doit citer au moins un article.
+    Toute conclusion positive (interdit, haut risque, risque limité, hors champ) doit citer au moins un article ;
+    « risque_minimal » et « indetermine » se justifient par l'absence d'article applicable.
     """
-    if assessment.risk_level != "indetermine" and not assessment.citations:
+    if assessment.risk_level not in UNCITED_RISK_LEVELS and not assessment.citations:
         return "aucune citation : toute conclusion doit être justifiée par au moins un article des extraits"
     invalid = invalid_citations(assessment, results)
     if not invalid:

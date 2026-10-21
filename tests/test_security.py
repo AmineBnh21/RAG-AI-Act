@@ -112,6 +112,7 @@ def test_au_moins_une_citation_sauf_indetermine():
     empty = assessment([], [])
     assert "aucune citation" in validate_citations(empty, results)
     assert validate_citations(empty.model_copy(update={"risk_level": "indetermine"}), results) is None
+    assert validate_citations(empty.model_copy(update={"risk_level": "risque_minimal"}), results) is None
 
 
 def test_citation_hors_extraits_dans_les_obligations():
