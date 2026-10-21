@@ -33,10 +33,13 @@ COLLECTION_PREFIX = "ai_act_"
 # Retrieval et génération
 TOP_K = 8
 LLM_TEMPERATURE = 0.0
+LLM_MAX_TOKENS = 2000
+LLM_TIMEOUT_S = 60
 MAX_RETRIES = 1
 
 # Sécurité
 MAX_INPUT_CHARS = 3000
+DESCRIPTION_TAG = "description_utilisateur"
 RATE_LIMIT_PER_SESSION = 10
 
 ChunkStrategy = Literal["article", "fixed"]
