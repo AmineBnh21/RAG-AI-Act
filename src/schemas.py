@@ -51,3 +51,28 @@ class Assessment(BaseModel):
     def cited_article_ids(self) -> set[str]:
         """Tous les articles cités, dans les citations et dans les obligations."""
         return {c.article_id for c in self.citations} | {i for o in self.obligations for i in o.article_ids}
+
+
+class TopicCheck(BaseModel):
+    """Réponse de la vérification « la description décrit-elle un système d'IA ? »."""
+
+    is_ai_system: bool
+    reason: str
+
+
+KeyInfo = Literal["domaine", "utilisateurs", "personnes_concernees", "biometrie", "decisions_automatisees", "role"]
+
+
+class KeyInfoExtraction(BaseModel):
+    """Réponse de la clarification : chaque info clé extraite de la description, ou None si absente."""
+
+    domaine: str | None = None
+    utilisateurs: str | None = None
+    personnes_concernees: str | None = None
+    biometrie: str | None = None
+    decisions_automatisees: str | None = None
+    role: str | None = None
+
+    def missing(self) -> list[KeyInfo]:
+        """Infos clés non trouvées (None ou chaîne vide)."""
+        return [key for key, value in self.model_dump().items() if not (value or "").strip()]

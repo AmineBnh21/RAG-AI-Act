@@ -5,10 +5,10 @@ from __future__ import annotations
 import json
 import re
 from functools import lru_cache
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, TypeVar
 
 from openai import OpenAI, OpenAIError
-from pydantic import ValidationError
+from pydantic import BaseModel, ValidationError
 
 from src.config import LLM_MAX_TOKENS, LLM_TEMPERATURE, LLM_TIMEOUT_S, settings
 from src.prompts import ASSESSMENT_SYSTEM, assessment_user_prompt
@@ -18,10 +18,15 @@ if TYPE_CHECKING:
     from src.retrieval import RetrievedChunk
 
 _CODE_FENCE = re.compile(r"^```(?:json)?\s*|\s*```$")
+M = TypeVar("M", bound=BaseModel)
 
 
 class GenerationError(RuntimeError):
-    """Échec de l'appel LLM ou réponse inexploitable (message sans donnée sensible)."""
+    """Réponse LLM inexploitable (message sans donnée sensible, réutilisable pour le retry)."""
+
+
+class LLMUnavailableError(GenerationError):
+    """L'API LLM n'a pas répondu (réseau, quota, clé) : un retry immédiat ne servirait à rien."""
 
 
 @lru_cache(maxsize=1)
@@ -35,18 +40,18 @@ def get_client() -> OpenAI:
     )
 
 
-def chat_json(system: str, user: str) -> str:
+def chat_json(system: str, user: str, max_tokens: int = LLM_MAX_TOKENS) -> str:
     """Appel LLM en mode JSON, température 0 ; renvoie le texte brut de la réponse."""
     try:
         response = get_client().chat.completions.create(
             model=settings.llm_model,
             messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
             temperature=LLM_TEMPERATURE,
-            max_tokens=LLM_MAX_TOKENS,
+            max_tokens=max_tokens,
             response_format={"type": "json_object"},
         )
     except OpenAIError as exc:
-        raise GenerationError(f"Appel LLM échoué ({type(exc).__name__})") from exc
+        raise LLMUnavailableError(f"Appel LLM échoué ({type(exc).__name__})") from exc
     content = response.choices[0].message.content
     if not content:
         raise GenerationError("Réponse LLM vide")
@@ -64,13 +69,23 @@ def parse_json(raw: str) -> dict:
     return data
 
 
-def parse_assessment(raw: str) -> Assessment:
-    """Valide la réponse du LLM contre le schéma Assessment."""
+def parse_model(raw: str, model: type[M]) -> M:
+    """Valide la réponse du LLM contre un modèle Pydantic."""
     try:
-        return Assessment.model_validate(parse_json(raw))
+        return model.model_validate(parse_json(raw))
     except ValidationError as exc:
         errors = "; ".join(f"{'.'.join(map(str, e['loc']))} : {e['msg']}" for e in exc.errors()[:5])
         raise GenerationError(f"Format invalide : {errors}") from exc
+
+
+def parse_assessment(raw: str) -> Assessment:
+    """Valide la réponse du LLM contre le schéma Assessment."""
+    return parse_model(raw, Assessment)
+
+
+def ask_model(system: str, user: str, model: type[M], max_tokens: int = LLM_MAX_TOKENS) -> M:
+    """Appel LLM court dont la réponse JSON est validée par `model`."""
+    return parse_model(chat_json(system, user, max_tokens), model)
 
 
 def assess(description: str, results: list[RetrievedChunk], feedback: str | None = None) -> Assessment:
