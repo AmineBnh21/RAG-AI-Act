@@ -16,7 +16,6 @@ from src.chunking import METADATA_FIELDS, Chunk
 from src.config import (
     CHROMA_DIR,
     CLASSIFICATION_ARTICLES,
-    CLASSIFICATION_K,
     OBLIGATION_ARTICLES,
     OBLIGATIONS_K,
     TOP_K,
@@ -68,16 +67,16 @@ def to_chunk(chunk_id: str, text: str, metadata: dict) -> Chunk:
     return Chunk(chunk_id=chunk_id, text=text, **fields)
 
 
-def search(
-    query: str,
-    k: int = TOP_K,
+def query_collection(
+    embedding: list[float],
+    k: int,
     strategy: ChunkStrategy | None = None,
     article_ids: tuple[str, ...] | None = None,
 ) -> list[RetrievedChunk]:
-    """Top-k chunks les plus proches de la requête ; `article_ids` restreint la recherche à ces articles."""
+    """Top-k chunks pour un embedding déjà calculé ; `article_ids` restreint la recherche à ces articles."""
     collection = get_collection(strategy or settings.chunk_strategy)
     result = collection.query(
-        query_embeddings=[embed_query(query)],
+        query_embeddings=[embedding],
         n_results=k,
         where={"article_id": {"$in": list(article_ids)}} if article_ids else None,
         include=["documents", "metadatas", "distances"],
@@ -86,29 +85,32 @@ def search(
     return [RetrievedChunk(to_chunk(cid, doc, meta), 1 - dist) for cid, doc, meta, dist in rows]
 
 
-AUGMENTATIONS: tuple[tuple[tuple[str, ...], int], ...] = (
-    (CLASSIFICATION_ARTICLES, CLASSIFICATION_K),
-    (OBLIGATION_ARTICLES, OBLIGATIONS_K),
-)
-
-
-def search_augmented(
+def search(
     query: str,
     k: int = TOP_K,
     strategy: ChunkStrategy | None = None,
-    augmentations: tuple[tuple[tuple[str, ...], int], ...] = AUGMENTATIONS,
+    article_ids: tuple[str, ...] | None = None,
 ) -> list[RetrievedChunk]:
-    """Recherche principale, puis pour chaque (articles, n) les n meilleurs chunks de ces articles, sans doublon.
+    """Top-k chunks les plus proches de la requête, du plus au moins similaire."""
+    return query_collection(embed_query(query), k, strategy, article_ids)
 
-    Garantit que le LLM voit les candidats de classification et d'obligations les plus proches,
-    même quand la recherche principale ne les remonte pas.
+
+def search_augmented(query: str, k: int = TOP_K, strategy: ChunkStrategy | None = None) -> list[RetrievedChunk]:
+    """Recherche principale complétée pour que le LLM voie toujours les candidats utiles.
+
+    1. top-k de la recherche principale ;
+    2. un candidat par niveau de risque : le meilleur chunk de chaque article de CLASSIFICATION_ARTICLES
+       absent des résultats (art. 2, art. 5, annexe III, art. 50) ;
+    3. les OBLIGATIONS_K meilleurs chunks des articles d'obligations, sans doublon.
     """
-    results = search(query, k, strategy)
-    for article_ids, n in augmentations:
-        seen = {r.chunk.chunk_id for r in results}
-        extra = search(query, n + len(results), strategy, article_ids)
-        results += [r for r in extra if r.chunk.chunk_id not in seen][:n]
-    return results
+    embedding = embed_query(query)
+    results = query_collection(embedding, k, strategy)
+    for article_id in CLASSIFICATION_ARTICLES:
+        if article_id not in article_ids(results):
+            results += query_collection(embedding, 1, strategy, (article_id,))
+    seen = {r.chunk.chunk_id for r in results}
+    extra = query_collection(embedding, OBLIGATIONS_K + len(results), strategy, OBLIGATION_ARTICLES)
+    return results + [r for r in extra if r.chunk.chunk_id not in seen][:OBLIGATIONS_K]
 
 
 def article_ids(results: list[RetrievedChunk]) -> set[str]:

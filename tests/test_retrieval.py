@@ -7,7 +7,6 @@ from src.chunking import Chunk
 from src.config import (
     CHROMA_DIR,
     CLASSIFICATION_ARTICLES,
-    CLASSIFICATION_K,
     OBLIGATION_ARTICLES,
     OBLIGATIONS_K,
     TOP_K,
@@ -59,13 +58,12 @@ def test_recherche_restreinte_aux_articles_demandes():
 
 
 @needs_index
-def test_search_augmented_ajoute_classification_et_obligations():
+def test_search_augmented_un_candidat_par_niveau_et_des_obligations():
     results = search_augmented("tri automatique de CV pour un recrutement", strategy="article")
-    assert len(results) == TOP_K + CLASSIFICATION_K + OBLIGATIONS_K
     assert len({r.chunk.chunk_id for r in results}) == len(results)
-    classification = results[TOP_K : TOP_K + CLASSIFICATION_K]
-    assert {r.chunk.article_id for r in classification} <= set(CLASSIFICATION_ARTICLES)
-    assert {r.chunk.article_id for r in results[TOP_K + CLASSIFICATION_K :]} <= set(OBLIGATION_ARTICLES)
+    assert set(CLASSIFICATION_ARTICLES) <= article_ids(results)
+    assert len(results) <= TOP_K + len(CLASSIFICATION_ARTICLES) + OBLIGATIONS_K
+    assert {r.chunk.article_id for r in results[-OBLIGATIONS_K:]} <= set(OBLIGATION_ARTICLES)
 
 
 @needs_index

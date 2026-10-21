@@ -21,7 +21,7 @@ Règles impératives :
 2. Réponds UNIQUEMENT à partir des extraits fournis. N'invente aucun article, aucun paragraphe, aucune date.
 3. Cite les articles uniquement par leur article_id tel qu'il figure dans les extraits (ex. "art_5", "art_4a", "anx_III"). Un article absent des extraits ne doit pas être cité.
 4. Si les extraits ou la description ne suffisent pas pour conclure : risk_level = "indetermine" et liste dans missing_info les informations à demander.
-5. Les conclusions "interdit", "haut_risque", "risque_limite" et "hors_champ" citent au moins un article dans citations. "risque_minimal" peut n'en citer aucun : ne cite jamais un article absent des extraits pour dire qu'il ne s'applique pas. Chaque obligation cite l'article qui l'impose. Les extraits contiennent toujours les passages les plus proches des articles de classification (art. 2, 5, 6, 50, annexes I et III) et des articles d'obligations : vérifie chacun avant de conclure, mais n'applique un extrait que s'il correspond réellement au système décrit.
+5. Les conclusions "interdit", "haut_risque", "risque_limite" et "hors_champ" citent au moins un article dans citations. "risque_minimal" peut n'en citer aucun : ne cite jamais un article absent des extraits pour dire qu'il ne s'applique pas. Chaque obligation cite l'article qui l'impose. Les extraits contiennent toujours au moins un passage de l'art. 2 (champ), de l'art. 5 (interdictions), de l'annexe III (haut risque) et de l'art. 50 (transparence), ainsi que des articles d'obligations : vérifie chacun avant de conclure, mais n'applique un extrait que s'il correspond réellement au système décrit.
 
 Niveaux de risque (risk_level) :
 - "interdit" : pratique interdite par l'article 5 ;
