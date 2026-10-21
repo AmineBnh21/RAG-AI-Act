@@ -1,1 +1,177 @@
-[]
+[
+  {
+    "id": "int_01_subliminal",
+    "description": "Notre studio développe un jeu mobile gratuit qui insère dans les animations des images subliminales, affichées quelques millisecondes, conçues par un modèle d'IA pour pousser les joueurs à acheter des crédits. Le jeu est distribué au grand public dans l'Union.",
+    "expected_risk": "interdit",
+    "expected_articles": ["art_5"],
+    "notes": "Art. 5 §1 a) : techniques subliminales altérant le comportement et causant un préjudice (financier). Fournisseur."
+  },
+  {
+    "id": "int_02_vulnerabilite_enfants",
+    "description": "Nous fabriquons une peluche connectée dotée d'un assistant vocal à base d'IA qui parle aux enfants de 4 à 8 ans. Pour augmenter l'engagement, l'assistant les encourage à relever des défis physiques de plus en plus risqués et à cacher ces jeux à leurs parents.",
+    "expected_risk": "interdit",
+    "expected_articles": ["art_5"],
+    "notes": "Art. 5 §1 b) : exploitation de la vulnérabilité due à l'âge, préjudice important (sécurité physique). Fournisseur."
+  },
+  {
+    "id": "int_03_deepfake_intime",
+    "description": "Notre application mobile permet à n'importe quel utilisateur d'importer la photo d'une personne réelle et génère automatiquement, grâce à un modèle d'IA générative, une image réaliste de cette personne nue, sans demander son consentement.",
+    "expected_risk": "interdit",
+    "expected_articles": ["art_5"],
+    "notes": "Art. 5 §1 b bis) (ajouté par le règlement 2026/1744) : contenus intimes réalistes d'une personne identifiable sans consentement. Applicable à partir du 2026-12-02."
+  },
+  {
+    "id": "int_04_notation_sociale",
+    "description": "Une municipalité veut déployer un système d'IA qui attribue à chaque habitant un score de civisme à partir de ses amendes, de ses publications sur les réseaux sociaux et des signalements de voisins. Les habitants ayant un score faible perdraient leur priorité pour l'accès aux logements sociaux et aux places en crèche.",
+    "expected_risk": "interdit",
+    "expected_articles": ["art_5"],
+    "notes": "Art. 5 §1 c) : notation sociale conduisant à un traitement défavorable dans des contextes dissociés. Déployeur (autorité publique)."
+  },
+  {
+    "id": "int_05_police_predictive",
+    "description": "Nous proposons aux forces de police un logiciel d'IA qui calcule, pour chaque personne d'un fichier, un score de probabilité de commettre un vol dans les douze prochains mois, uniquement à partir de son profil psychologique, de son âge et de son quartier, sans aucun fait concret reproché.",
+    "expected_risk": "interdit",
+    "expected_articles": ["art_5"],
+    "notes": "Art. 5 §1 d) : prédiction du risque d'infraction fondée uniquement sur le profilage et les traits de personnalité. Fournisseur."
+  },
+  {
+    "id": "int_06_moissonnage_visages",
+    "description": "Notre entreprise construit une base de données de reconnaissance faciale en collectant automatiquement, sans ciblage, des milliards de photos de visages publiées sur internet et sur les réseaux sociaux. La base est ensuite vendue à des entreprises de sécurité.",
+    "expected_risk": "interdit",
+    "expected_articles": ["art_5"],
+    "notes": "Art. 5 §1 e) : moissonnage non ciblé d'images faciales sur internet pour créer une base de reconnaissance faciale."
+  },
+  {
+    "id": "int_07_emotions_travail",
+    "description": "Notre centre d'appels utilise un logiciel d'IA qui analyse la voix des téléconseillers pendant les appels pour détecter leurs émotions (stress, colère, ennui). Les résultats sont intégrés à leur évaluation annuelle par les managers.",
+    "expected_risk": "interdit",
+    "expected_articles": ["art_5"],
+    "notes": "Art. 5 §1 f) : inférence des émotions sur le lieu de travail, sans raison médicale ou de sécurité. Déployeur."
+  },
+  {
+    "id": "int_08_categorisation_biometrique",
+    "description": "Nous développons une API d'IA qui analyse des photos de visages pour déduire l'orientation sexuelle et les opinions politiques des personnes photographiées. Des annonceurs l'utilisent pour cibler leurs publicités.",
+    "expected_risk": "interdit",
+    "expected_articles": ["art_5"],
+    "notes": "Art. 5 §1 g) : catégorisation biométrique visant à déduire l'orientation sexuelle et les opinions politiques. Fournisseur."
+  },
+  {
+    "id": "int_09_identification_temps_reel_police",
+    "description": "La police municipale souhaite utiliser des caméras dans les rues piétonnes, reliées à un système d'IA qui identifie en temps réel les visages des passants et les compare à un fichier de personnes recherchées pour des délits mineurs comme le vol à l'étalage.",
+    "expected_risk": "interdit",
+    "expected_articles": ["art_5"],
+    "notes": "Art. 5 §1 h) : identification biométrique à distance en temps réel, espace public, fins répressives, hors des exceptions i) à iii) (délits mineurs). Déployeur."
+  },
+  {
+    "id": "hr_01_identification_biometrique_privee",
+    "description": "Notre chaîne de supermarchés a installé à l'entrée des magasins des caméras avec reconnaissance faciale en temps réel, fournies par un prestataire, qui comparent les visages des clients à une liste de personnes déjà signalées pour vol et alertent les vigiles.",
+    "expected_risk": "haut_risque",
+    "expected_articles": ["anx_III"],
+    "notes": "À VALIDER : identification biométrique à distance par un acteur privé. L'art. 5 §1 h) ne vise que les fins répressives (autorités) ; on relève donc de l'annexe III point 1 a). La licéité au regard du RGPD (art. 9) est une autre question. Déployeur."
+  },
+  {
+    "id": "hr_02_infrastructure_critique",
+    "description": "Nous développons un système d'IA qui pilote automatiquement l'ouverture et la fermeture des vannes d'un réseau régional de distribution d'eau potable afin d'éviter les surpressions et les coupures. Il agit comme composant de sécurité du réseau.",
+    "expected_risk": "haut_risque",
+    "expected_articles": ["anx_III"],
+    "notes": "Annexe III point 2 : composant de sécurité dans la gestion de la fourniture d'eau. Fournisseur."
+  },
+  {
+    "id": "hr_03_admission_universite",
+    "description": "Notre plateforme d'IA classe automatiquement les dossiers des lycéens candidats à nos formations universitaires et décide lesquels sont admis, en fonction de leurs notes, de leurs lettres de motivation et de leur lycée d'origine. Nous l'avons développée en interne.",
+    "expected_risk": "haut_risque",
+    "expected_articles": ["anx_III"],
+    "notes": "Annexe III point 3 a) : admission dans un établissement d'enseignement. Fournisseur et déployeur."
+  },
+  {
+    "id": "hr_04_surveillance_examens",
+    "description": "Notre université utilise un logiciel acheté à un éditeur qui surveille les étudiants par webcam pendant les examens en ligne et signale automatiquement les comportements suspects de triche aux enseignants, qui décident ensuite d'éventuelles sanctions.",
+    "expected_risk": "haut_risque",
+    "expected_articles": ["anx_III"],
+    "notes": "Annexe III point 3 d) : détection de comportements interdits lors d'examens. Déployeur."
+  },
+  {
+    "id": "hr_05_tri_cv",
+    "description": "Notre start-up développe un logiciel SaaS qui analyse automatiquement les CV reçus par les entreprises clientes, attribue un score à chaque candidat et écarte ceux dont le score est inférieur à un seuil, sans revue humaine.",
+    "expected_risk": "haut_risque",
+    "expected_articles": ["anx_III"],
+    "notes": "Annexe III point 4 a) : recrutement, analyse et filtrage des candidatures. Fournisseur. Obligations à partir du 2027-12-02."
+  },
+  {
+    "id": "hr_06_evaluation_salaries",
+    "description": "Nous utilisons un outil d'IA qui analyse l'activité informatique de nos salariés (courriels, temps passé dans les logiciels, tickets traités) et produit un classement mensuel utilisé par les RH pour décider des primes, des promotions et des licenciements.",
+    "expected_risk": "haut_risque",
+    "expected_articles": ["anx_III"],
+    "notes": "Annexe III point 4 b) : décisions de promotion et de licenciement, suivi des performances. Déployeur."
+  },
+  {
+    "id": "hr_07_scoring_credit",
+    "description": "Notre banque a développé un modèle d'IA qui évalue la solvabilité des particuliers demandant un prêt immobilier et calcule leur note de crédit ; les demandes sous un certain score sont refusées automatiquement.",
+    "expected_risk": "haut_risque",
+    "expected_articles": ["anx_III"],
+    "notes": "Annexe III point 5 b) : évaluation de la solvabilité et note de crédit des personnes physiques. Fournisseur et déployeur."
+  },
+  {
+    "id": "hr_08_prestations_sociales",
+    "description": "Une caisse publique d'allocations familiales utilise un système d'IA qui évalue automatiquement l'éligibilité des familles aux aides au logement et signale les dossiers à suspendre pour suspicion de fraude.",
+    "expected_risk": "haut_risque",
+    "expected_articles": ["anx_III"],
+    "notes": "Annexe III point 5 a) : autorité publique évaluant l'éligibilité aux prestations sociales essentielles. Déployeur."
+  },
+  {
+    "id": "hr_09_appels_urgence",
+    "description": "Le service d'urgences médicales d'une région utilise un logiciel d'IA qui écoute les appels entrants, évalue leur gravité et fixe l'ordre de priorité d'envoi des ambulances.",
+    "expected_risk": "haut_risque",
+    "expected_articles": ["anx_III"],
+    "notes": "Annexe III point 5 d) : évaluation et hiérarchisation des appels d'urgence, priorités d'envoi des secours. Déployeur."
+  },
+  {
+    "id": "hr_10_aide_juges",
+    "description": "Nous développons pour les tribunaux un assistant d'IA qui analyse les pièces d'un dossier, recherche la jurisprudence applicable et propose au juge une décision rédigée sur la culpabilité et la peine.",
+    "expected_risk": "haut_risque",
+    "expected_articles": ["anx_III"],
+    "notes": "Annexe III point 8 a) : aide aux autorités judiciaires pour interpréter les faits et la loi et les appliquer. Fournisseur."
+  },
+  {
+    "id": "lim_01_chatbot",
+    "description": "Notre site e-commerce utilise un chatbot basé sur un modèle de langage acheté à un éditeur, qui répond aux questions des clients sur leurs commandes et les retours, sans prendre de décision à leur sujet.",
+    "expected_risk": "risque_limite",
+    "expected_articles": ["art_50"],
+    "notes": "Art. 50 §1 : système interagissant directement avec des personnes, obligation d'information. Déployeur (l'obligation du §1 vise le fournisseur)."
+  },
+  {
+    "id": "lim_02_generation_images",
+    "description": "Notre agence de communication a développé un outil d'IA générative qui crée des visuels publicitaires photoréalistes et de courtes vidéos à partir d'un texte, vendus à nos clients pour leurs campagnes.",
+    "expected_risk": "risque_limite",
+    "expected_articles": ["art_50"],
+    "notes": "Art. 50 §2 : marquage des contenus de synthèse (fournisseur) ; §4 si hypertrucage (déployeur)."
+  },
+  {
+    "id": "min_01_antispam",
+    "description": "Notre messagerie d'entreprise intègre un filtre anti-spam fondé sur un modèle d'apprentissage automatique qui classe les courriels entrants en courriels légitimes ou indésirables. Les utilisateurs peuvent consulter le dossier des indésirables.",
+    "expected_risk": "risque_minimal",
+    "expected_articles": [],
+    "notes": "Aucune pratique interdite, aucun domaine de l'annexe III, pas d'interaction directe au sens de l'art. 50. Seule l'obligation générale de maîtrise de l'IA (art. 4) peut s'appliquer."
+  },
+  {
+    "id": "min_02_jeu_video",
+    "description": "Notre studio développe un jeu vidéo de stratégie dans lequel les adversaires contrôlés par l'ordinateur utilisent un modèle d'apprentissage par renforcement pour adapter leur tactique au niveau du joueur.",
+    "expected_risk": "risque_minimal",
+    "expected_articles": [],
+    "notes": "IA de jeu vidéo : aucun cas de l'art. 5, de l'annexe III ou de l'art. 50."
+  },
+  {
+    "id": "hc_01_militaire",
+    "description": "Notre entreprise de défense développe, exclusivement pour l'armée de notre pays, un système d'IA de reconnaissance automatique de cibles embarqué sur des drones militaires.",
+    "expected_risk": "hors_champ",
+    "expected_articles": ["art_2"],
+    "notes": "Art. 2 §3 : exclusion des systèmes d'IA utilisés exclusivement à des fins militaires, de défense ou de sécurité nationale."
+  },
+  {
+    "id": "hc_02_recherche",
+    "description": "Notre laboratoire universitaire entraîne un modèle d'IA expérimental de détection précoce de tumeurs sur des images médicales anonymisées, uniquement pour une publication scientifique. Le modèle ne sera ni commercialisé ni utilisé sur des patients.",
+    "expected_risk": "hors_champ",
+    "expected_articles": ["art_2"],
+    "notes": "Art. 2 §6 et §8 : systèmes développés et mis en service uniquement à des fins de recherche scientifique, avant toute mise sur le marché."
+  }
+]
