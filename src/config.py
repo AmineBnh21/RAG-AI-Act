@@ -40,6 +40,13 @@ MAX_INPUT_CHARS = 3000
 RATE_LIMIT_PER_SESSION = 10
 
 ChunkStrategy = Literal["article", "fixed"]
+STRATEGIES: tuple[ChunkStrategy, ...] = ("article", "fixed")
+EMBEDDING_BATCH_SIZE = 32
+
+
+def collection_name(strategy: ChunkStrategy) -> str:
+    """Nom de la collection Chroma d'une stratégie (ai_act_article, ai_act_fixed)."""
+    return f"{COLLECTION_PREFIX}{strategy}"
 
 
 class Settings(BaseModel):
@@ -56,12 +63,7 @@ class Settings(BaseModel):
     @property
     def collection_name(self) -> str:
         """Nom de la collection Chroma de la stratégie active."""
-        return f"{COLLECTION_PREFIX}{self.chunk_strategy}"
-
-    @property
-    def is_e5(self) -> bool:
-        """Vrai si le modèle d'embedding attend les préfixes query:/passage:."""
-        return "e5" in self.embedding_model.lower()
+        return collection_name(self.chunk_strategy)
 
 
 def load_settings() -> Settings:
