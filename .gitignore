@@ -1,0 +1,14 @@
+# Secrets et environnement
+.env
+.venv/
+
+# Artefacts générés
+chroma_db/
+__pycache__/
+*.pyc
+.pytest_cache/
+eval/results/*.json
+
+# Fichiers locaux de pilotage
+CLAUDE.md
+PLAN_CLAUDE_CODE.md

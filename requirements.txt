@@ -1,0 +1,20 @@
+# Parsing du corpus EUR-Lex
+beautifulsoup4>=4.12
+lxml>=5.0
+
+# Embeddings et base vectorielle
+sentence-transformers>=3.0
+chromadb>=0.5
+
+# LLM (SDK OpenAI, URL configurable : Mistral par défaut)
+openai>=1.40
+
+# Validation et configuration
+pydantic>=2.0
+python-dotenv>=1.0
+
+# Interface
+streamlit>=1.35
+
+# Tests
+pytest>=8.0
