@@ -109,30 +109,31 @@ pytest
 python -m eval.run_eval --strategy article --defenses on
 ```
 
-## Déploiement (Hugging Face Spaces)
+## Déploiement (Streamlit Community Cloud)
 
-L'application est déployée sur un Space **Docker** en CPU gratuit (16 Go de RAM, nécessaires pour `bge-m3`).
-- **Pas de ré-indexation sur le Space** : `scripts/export_space.py` prépare `dist/hf_space/` avec seulement le code de l'application et un index Chroma contenant la collection active.
-- **Démarrage hors ligne** : le `Dockerfile` installe torch en version CPU et télécharge le modèle d'embedding pendant la construction, puis l'application tourne sans accès au Hub.
+L'application tourne sur l'offre gratuite de Streamlit Community Cloud, déployée directement depuis ce dépôt GitHub. Cette offre limite la RAM à environ 2,7 Go. Deux réglages permettent de garder `bge-m3` malgré tout :
+- **Modèle en float16** (`EMBEDDING_DTYPE=float16`) : la mémoire occupée par le modèle est divisée par deux. Les vecteurs restent quasi identiques à ceux de l'index, calculé en float32 : cosinus ≥ 0,9999 sur 40 chunks, et recall@8 identique sur les 25 cas d'éval (70 %). En contrepartie, l'encodage d'une requête est plus lent sur CPU, de l'ordre de quelques secondes.
+- **Index commité** (`deploy/chroma_db`, 8 Mo) : il contient seulement la collection active, ce qui évite de ré-indexer sur le serveur.
 
 ```powershell
-hf auth login                                         # jeton "write" : https://huggingface.co/settings/tokens
-hf repos create <utilisateur>/assistant-ai-act --type space --space-sdk docker --public
-python -m scripts.export_space                        # -> dist\hf_space
-hf upload <utilisateur>/assistant-ai-act dist\hf_space . --repo-type space
-hf spaces variables add <utilisateur>/assistant-ai-act -e LLM_MODEL=ministral-8b-latest
+python -m scripts.export_space --index-only deploy\chroma_db   # après chaque ré-indexation
+git push
 ```
 
-Ajouter ensuite la clé API comme **secret**, dans l'onglet *Settings → Variables and secrets* du Space : nom `LLM_API_KEY`, valeur la clé Mistral. Le premier build prend 10 à 15 minutes.
+Sur [share.streamlit.io](https://share.streamlit.io), choisir *Create app*, sélectionner ce dépôt, la branche `main` et le fichier `app.py`. Dans *Advanced settings*, prendre Python 3.11 et coller les secrets ci-dessous. Streamlit expose ces secrets à l'application comme variables d'environnement.
+
+```toml
+LLM_API_KEY = "..."
+LLM_MODEL = "ministral-8b-latest"
+EMBEDDING_DTYPE = "float16"
+CHROMA_DIR = "deploy/chroma_db"
+```
+
+Le premier démarrage télécharge le modèle, ce qui prend quelques minutes. Après une période d'inactivité, l'application se met en veille et le réveil prend à nouveau 1 à 2 minutes.
 
 ⚠️ La limite de 10 évaluations est **par session** : recharger la page ouvre une nouvelle session. Pour une démo publique, fixer aussi un **plafond de dépenses** sur la clé API, dans la console Mistral.
 
-Tester l'image en local avant l'envoi :
-
-```powershell
-docker build -t ai-act-space dist\hf_space
-docker run --rm -p 7860:7860 --env-file .env ai-act-space   # http://localhost:7860
-```
+**Alternative Docker (Hugging Face Spaces, abonnement PRO requis pour les Spaces Docker)** : `python -m scripts.export_space` prépare `dist\hf_space\`, qui contient le code, l'index et un `Dockerfile`. L'image installe torch en version CPU et embarque le modèle, ce qui lui permet de démarrer hors ligne.
 
 ## Structure du projet
 
