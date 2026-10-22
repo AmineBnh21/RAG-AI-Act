@@ -3,10 +3,11 @@
 > Décrivez votre système d'IA, obtenez son niveau de risque au sens de l'**AI Act européen (Règlement (UE) 2024/1689)**, les obligations qui s'appliquent avec leur date d'application et les **articles exacts** qui les justifient.
 
 ![Statut](https://img.shields.io/badge/statut-MVP-yellow)
+[![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://rag-ai-act-goaxqh2xcr67jbfhrutwoq.streamlit.app/)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Tests](https://img.shields.io/badge/tests-121%20passing-brightgreen)
 
-🔗 **Démo en ligne :** _à venir_
+🔗 **Démo en ligne :** [rag-ai-act-goaxqh2xcr67jbfhrutwoq.streamlit.app](https://rag-ai-act-goaxqh2xcr67jbfhrutwoq.streamlit.app/) (le réveil après inactivité prend 1 à 2 minutes)
 
 <!-- TODO : ajouter un GIF de démo ici -->
 <!-- ![Démo](docs/demo.gif) -->
@@ -71,43 +72,6 @@ Le pipeline est écrit à la main (sans LangChain ni LlamaIndex) pour que chaque
 | Tests | pytest (121 tests, LLM simulé : aucun appel réseau) |
 
 **Choix du modèle d'embedding** : `multilingual-e5-small` a été testé d'abord. Ses scores étaient tassés (0,75 à 0,85 pour tous les chunks) et il classait l'annexe III point 1 au 165e rang pour « reconnaissance faciale ». `bge-m3` distingue bien mieux les chunks (scores de 0,2 à 0,6) et met le bon chunk 1er sur la plupart des requêtes de test, au prix d'une indexation plus lente (42 min sur CPU contre 2,5 min).
-
-## Installation
-
-Sous Windows (PowerShell) :
-
-```powershell
-git clone https://github.com/AmineBnh21/RAG-AI-Act.git
-cd RAG-AI-Act
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-```
-
-Copier `.env.example` en `.env` et renseigner la clé :
-
-```
-LLM_BASE_URL=https://api.mistral.ai/v1
-LLM_API_KEY=votre_clé
-LLM_MODEL=ministral-8b-latest
-EMBEDDING_MODEL=BAAI/bge-m3
-CHUNK_STRATEGY=article
-```
-
-Construire le corpus et l'index, puis lancer l'application :
-
-```powershell
-python -m scripts.build_corpus     # HTML EUR-Lex -> data/articles.json
-python -m scripts.build_index      # chunks -> ChromaDB (les deux stratégies)
-streamlit run app.py
-```
-
-Tests et évaluation :
-
-```powershell
-pytest
-python -m eval.run_eval --strategy article --defenses on
-```
 
 ## Déploiement (Streamlit Community Cloud)
 
@@ -240,17 +204,6 @@ Aucune défense contre le prompt injection n'est parfaite : ces mesures réduise
 - La qualité de la classification dépend de la précision de la description fournie, et du LLM : un modèle de 8 milliards de paramètres se trompe sur des cas limites (ex. obligations d'évaluation de conformité par un tiers).
 - Les résultats varient d'un run à l'autre, même à température 0 : sur 25 cas, un cas représente 4 points d'exactitude.
 - Le pipeline a été amélioré en analysant les échecs de ce même jeu de test : les chiffres sont probablement un peu optimistes. Un jeu de cas jamais utilisé pour régler le pipeline donnerait une mesure plus honnête.
-
-## Feuille de route
-
-- [x] Pipeline RAG de bout en bout
-- [x] Interface Streamlit
-- [x] Questions de clarification
-- [x] Défenses contre le prompt injection
-- [x] Évaluation (chunking + sécurité)
-- [ ] Jeu de test « jamais vu » pour une mesure non biaisée
-- [ ] Déploiement
-- [ ] GIF de démo
 
 ## Auteur
 
