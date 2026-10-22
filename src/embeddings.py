@@ -26,8 +26,8 @@ def with_prefix(texts: list[str], kind: TextKind, model_name: str) -> list[str]:
 
 @lru_cache(maxsize=2)
 def load_model(model_name: str = settings.embedding_model) -> SentenceTransformer:
-    """Charge le modèle une seule fois par processus."""
-    return SentenceTransformer(model_name)
+    """Charge le modèle une seule fois par processus, dans la précision configurée."""
+    return SentenceTransformer(model_name, model_kwargs={"dtype": settings.embedding_dtype})
 
 
 def embed(texts: list[str], kind: TextKind, model_name: str = settings.embedding_model) -> list[list[float]]:

@@ -1,13 +1,16 @@
 """Prépare dist/hf_space/ : le dossier à envoyer sur un Hugging Face Space (SDK Docker).
 
-Usage : python -m scripts.export_space
+Usage : python -m scripts.export_space                      # dossier complet du Space
+        python -m scripts.export_space --index-only deploy\chroma_db   # index seul (Streamlit Cloud)
 Copie uniquement ce dont l'application a besoin et exporte un index Chroma propre
 contenant la seule collection de la stratégie active (pas de ré-indexation sur le Space).
 """
 
 from __future__ import annotations
 
+import argparse
 import shutil
+from pathlib import Path
 
 import chromadb
 
@@ -30,11 +33,11 @@ def copy_sources() -> None:
     shutil.copy2(SPACE_README, DIST_DIR / "README.md")
 
 
-def export_index() -> int:
-    """Recopie la collection active (embeddings compris) dans dist/hf_space/chroma_db."""
+def export_index(target_dir: Path) -> int:
+    """Recopie la collection active (embeddings compris) dans un nouvel index Chroma."""
     source = get_collection(settings.chunk_strategy)  # vérifie aussi le modèle d'embedding
     data = source.get(include=["embeddings", "documents", "metadatas"])
-    target = chromadb.PersistentClient(path=str(DIST_DIR / "chroma_db")).create_collection(
+    target = chromadb.PersistentClient(path=str(target_dir)).create_collection(
         collection_name(settings.chunk_strategy),
         configuration={"hnsw": {"space": "cosine"}},
         metadata=source.metadata,
@@ -50,12 +53,25 @@ def export_index() -> int:
     return target.count()
 
 
+def reset_dir(path: Path) -> None:
+    """Vide le dossier de sortie pour repartir d'un export propre."""
+    if path.exists():
+        shutil.rmtree(path)
+    path.mkdir(parents=True)
+
+
 def main() -> None:
-    if DIST_DIR.exists():
-        shutil.rmtree(DIST_DIR)
-    DIST_DIR.mkdir(parents=True)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--index-only", type=Path, help="exporter seulement l'index dans ce dossier")
+    args = parser.parse_args()
+    if args.index_only:
+        target = args.index_only if args.index_only.is_absolute() else ROOT_DIR / args.index_only
+        reset_dir(target)
+        print(f"{target} prêt : {export_index(target)} chunks, modèle {settings.embedding_model}")
+        return
+    reset_dir(DIST_DIR)
     copy_sources()
-    count = export_index()
+    count = export_index(DIST_DIR / "chroma_db")
     print(f"{DIST_DIR} prêt : collection {collection_name(settings.chunk_strategy)} ({count} chunks), "
           f"modèle {settings.embedding_model}")
 

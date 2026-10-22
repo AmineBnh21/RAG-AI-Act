@@ -16,7 +16,8 @@ load_dotenv(ROOT_DIR / ".env")
 DATA_DIR = ROOT_DIR / "data"
 SOURCE_HTML = DATA_DIR / "ai_act_fr_2026-07-27.html"
 ARTICLES_JSON = DATA_DIR / "articles.json"
-CHROMA_DIR = ROOT_DIR / "chroma_db"
+# Surchargeable pour pointer vers l'index exporté et commité (deploy/chroma_db) sur Streamlit Cloud
+CHROMA_DIR = ROOT_DIR / (os.environ.get("CHROMA_DIR") or "chroma_db")
 EVAL_DIR = ROOT_DIR / "eval"
 EVAL_RESULTS_DIR = EVAL_DIR / "results"
 
@@ -56,6 +57,8 @@ DESCRIPTION_TAG = "description_utilisateur"
 RATE_LIMIT_PER_SESSION = 10
 
 ChunkStrategy = Literal["article", "fixed"]
+# float16 divise par deux la mémoire du modèle (hébergement gratuit limité en RAM)
+EmbeddingDtype = Literal["float32", "float16"]
 STRATEGIES: tuple[ChunkStrategy, ...] = ("article", "fixed")
 EMBEDDING_BATCH_SIZE = 32
 
@@ -74,6 +77,7 @@ class Settings(BaseModel):
     llm_api_key: SecretStr = Field(default=SecretStr(""), repr=False)
     llm_model: str = "mistral-small-latest"
     embedding_model: str = "BAAI/bge-m3"
+    embedding_dtype: EmbeddingDtype = "float32"
     chunk_strategy: ChunkStrategy = "article"
 
     @property
@@ -84,7 +88,7 @@ class Settings(BaseModel):
 
 def load_settings() -> Settings:
     """Construit les Settings à partir des variables d'environnement non vides."""
-    keys = ["LLM_BASE_URL", "LLM_API_KEY", "LLM_MODEL", "EMBEDDING_MODEL", "CHUNK_STRATEGY"]
+    keys = ["LLM_BASE_URL", "LLM_API_KEY", "LLM_MODEL", "EMBEDDING_MODEL", "EMBEDDING_DTYPE", "CHUNK_STRATEGY"]
     values = {k.lower(): os.environ[k] for k in keys if os.environ.get(k)}
     return Settings(**values)
 
