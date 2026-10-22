@@ -109,6 +109,31 @@ pytest
 python -m eval.run_eval --strategy article --defenses on
 ```
 
+## Déploiement (Hugging Face Spaces)
+
+L'application est déployée sur un Space **Docker** en CPU gratuit (16 Go de RAM, nécessaires pour `bge-m3`).
+- **Pas de ré-indexation sur le Space** : `scripts/export_space.py` prépare `dist/hf_space/` avec seulement le code de l'application et un index Chroma contenant la collection active.
+- **Démarrage hors ligne** : le `Dockerfile` installe torch en version CPU et télécharge le modèle d'embedding pendant la construction, puis l'application tourne sans accès au Hub.
+
+```powershell
+hf auth login                                         # jeton "write" : https://huggingface.co/settings/tokens
+hf repos create <utilisateur>/assistant-ai-act --type space --space-sdk docker --public
+python -m scripts.export_space                        # -> dist\hf_space
+hf upload <utilisateur>/assistant-ai-act dist\hf_space . --repo-type space
+hf spaces variables add <utilisateur>/assistant-ai-act -e LLM_MODEL=ministral-8b-latest
+```
+
+Ajouter ensuite la clé API comme **secret**, dans l'onglet *Settings → Variables and secrets* du Space : nom `LLM_API_KEY`, valeur la clé Mistral. Le premier build prend 10 à 15 minutes.
+
+⚠️ La limite de 10 évaluations est **par session** : recharger la page ouvre une nouvelle session. Pour une démo publique, fixer aussi un **plafond de dépenses** sur la clé API, dans la console Mistral.
+
+Tester l'image en local avant l'envoi :
+
+```powershell
+docker build -t ai-act-space dist\hf_space
+docker run --rm -p 7860:7860 --env-file .env ai-act-space   # http://localhost:7860
+```
+
 ## Structure du projet
 
 ```
